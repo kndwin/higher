@@ -2,13 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "target": "es2018",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext",
-      "ES2018",
-      "ESNext.AsyncIterable"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext", "ES2018", "ESNext.AsyncIterable"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "allowJs": true,
@@ -23,16 +17,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "types": [
-      "cypress"
-    ]
+    "types": ["cypress"]
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }

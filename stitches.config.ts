@@ -36,9 +36,9 @@ export const {
       5: "40px",
       6: "60px",
     },
-		radii: {
-			1: "8px", 
-		},
+    radii: {
+      1: "8px",
+    },
     sizes: {
       1: "4px",
       2: "8px",
@@ -114,6 +114,10 @@ export const {
       width: value,
       height: value,
     }),
+		minSize: (value: string) => ({
+			minWidth: value,
+			minHeight: value,
+		 }),
 
     // A property to apply linear gradient
     linearGradient: (value: string) => ({

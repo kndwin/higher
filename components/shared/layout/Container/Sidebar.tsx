@@ -2,7 +2,7 @@ import { useCallback, useRef, useState, useEffect, useContext } from "react";
 import type { MouseEvent } from "react";
 
 import { styled } from "stitches.config";
-import { Group, Icon } from "components/shared";
+import { Flex, Icon } from "components/shared";
 import { LogoIcon, DoubleChevronIcon } from "components/icons";
 
 import { SIDEBAR_WIDTH, ContainerContext } from "./Container";
@@ -35,7 +35,7 @@ export const Sidebar = ({ children }) => {
         }
       }
     },
-    [isResizing]
+    [isResizing, setSidebarWidth]
   );
 
   useEffect(() => {
@@ -55,22 +55,23 @@ export const Sidebar = ({ children }) => {
   return (
     <Container
       css={{
-        transition: `${!isResizing && "width"} 0.2s ease-in-out`,
-        width: sidebarWidth,
+        transition: `${!isResizing && "all"} 0.2s ease-in-out`,
+        maxWidth: sidebarWidth,
         opacity: isSidebarOpen ? "1" : "0",
+				borderWidth: isSidebarOpen ? "3px" : "0",
       }}
       ref={sidebarRef}
       onMouseDown={(e: MouseEvent) => e.preventDefault()}
     >
       <Content>
-        <Group position="apart">
+				<Flex css={{ justifyContent: "space-between" }}>
           <Icon>
             <LogoIcon />
           </Icon>
           <Icon type="filled" onClick={() => handleSidebarClose()}>
             <DoubleChevronIcon />
           </Icon>
-        </Group>
+        </Flex>
         {children}
       </Content>
       <Resizer onMouseDown={startResizing} />
@@ -79,9 +80,11 @@ export const Sidebar = ({ children }) => {
 };
 
 const Container = styled("div", {
+	width: "100%", 
   display: "flex",
   background: "$bg",
   borderRight: "3px solid $bg1",
+	overflowX: "hidden"
 });
 
 const Content = styled("div", {
@@ -89,7 +92,7 @@ const Content = styled("div", {
   display: "flex",
   flexDirection: "column",
   p: "$3",
-	pr: "$1"
+  pr: "$1",
 });
 
 const Resizer = styled("div", {

@@ -5,7 +5,8 @@ export const Icon = styled("div", {
   alignItems: "center",
   justifyContent: "center",
   br: "$1",
-	size: "$4", 
+  size: "$4",
+	minSize: "$4",
   "&:hover": {
     cursor: "pointer",
   },

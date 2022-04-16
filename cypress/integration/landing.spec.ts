@@ -1,4 +1,4 @@
-export {}
+export {};
 describe("Show landing page", () => {
   it("show landing page", () => {
     cy.visit("http://localhost:3000/");

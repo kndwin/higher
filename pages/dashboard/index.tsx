@@ -1,23 +1,26 @@
 import { styled } from "stitches.config";
-import { Container, Text, Group, withAuth } from "components/shared";
+import { Container, Flex, Text } from "components/shared";
 
 import { Header } from "components/pages/Dashboard";
+import { ComponentWithAuth } from "types/auth";
 
-function Dashboard() {
+function Dashboard(): ComponentWithAuth {
   return (
     <Container>
       <Container.Sidebar>
         <Text>{`Hello`}</Text>
       </Container.Sidebar>
 
-      <Group direction="col">
+      <Flex css={{ flexDirection: "column", justifyItems: "start" }}>
         <Header />
         <Main />
-      </Group>
+      </Flex>
     </Container>
   );
 }
-export default withAuth(Dashboard);
+export default Dashboard;
+
+Dashboard.authenticationEnabled = true;
 
 const Main = () => <StyledMain></StyledMain>;
 
@@ -26,4 +29,5 @@ const StyledMain = styled("main", {
   flexDirection: "column",
   flexGrow: 1,
   background: "$bg1",
+  width: "100%",
 });
