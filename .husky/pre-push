@@ -1,0 +1,19 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo '👷 Running cypress tests...'
+
+yarn run cypress:run:unit ||
+(
+    echo '❌ Unit Test Failed.'
+    false;
+)
+
+yarn run cypress:run:e2e ||
+(
+    echo '❌ E@E Test Failed.'
+    false;
+)
+
+# If everything passes... Now we can commit
+echo '✅ All checks passed!'

@@ -21,4 +21,13 @@ export const Text = styled("p", {
       },
     },
   },
+  compoundVariants: [
+    {
+      title: true,
+      as: "h1",
+      css: {
+        fontSize: "$6",
+      },
+    },
+  ],
 });
