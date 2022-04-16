@@ -1,6 +1,6 @@
 // Compound
-export { Avatar } from './compound/Avatar/Avatar'
-export { DropdownMenu } from './compound/DropdownMenu/DropdownMenu'
+export { Avatar } from "./compound/Avatar/Avatar";
+export { DropdownMenu } from "./compound/DropdownMenu/DropdownMenu";
 
 // Primitives
 export { Text } from "./primitive/Text/Text";

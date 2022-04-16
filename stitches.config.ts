@@ -114,10 +114,10 @@ export const {
       width: value,
       height: value,
     }),
-		minSize: (value: string) => ({
-			minWidth: value,
-			minHeight: value,
-		 }),
+    minSize: (value: string) => ({
+      minWidth: value,
+      minHeight: value,
+    }),
 
     // A property to apply linear gradient
     linearGradient: (value: string) => ({

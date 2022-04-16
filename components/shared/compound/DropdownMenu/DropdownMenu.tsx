@@ -1,8 +1,18 @@
+import React from 'react';
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { styled } from "stitches.config";
 import { keyframes } from "@stitches/react";
 
-export const DropdownMenu = DropdownMenuPrimitive.Root;
+type DropdownMenuProps = React.FC<DropdownMenuPrimitive.DropdownMenuProps> & {
+	Trigger?: React.FC<DropdownMenuPrimitive.DropdownMenuTriggerProps>;
+	Content?: React.FC<DropdownMenuPrimitive.DropdownMenuContentProps>;
+	Item?: React.FC<DropdownMenuPrimitive.DropdownMenuItemProps>;
+	CheckboxItem?: React.FC<DropdownMenuPrimitive.DropdownMenuCheckboxItemProps>;
+	RadioItem?: React.FC<DropdownMenuPrimitive.DropdownMenuRadioItemProps>;
+	TriggerItem?: React.FC<DropdownMenuPrimitive.DropdownMenuTriggerItemProps>;
+}
+
+export const DropdownMenu: DropdownMenuProps = DropdownMenuPrimitive.Root;
 
 const slideUpAndFade = keyframes({
   "0%": { opacity: 0, transform: "translateY(2px)" },

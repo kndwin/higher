@@ -58,13 +58,13 @@ export const Sidebar = ({ children }) => {
         transition: `${!isResizing && "all"} 0.2s ease-in-out`,
         maxWidth: sidebarWidth,
         opacity: isSidebarOpen ? "1" : "0",
-				borderWidth: isSidebarOpen ? "3px" : "0",
+        borderWidth: isSidebarOpen ? "3px" : "0",
       }}
       ref={sidebarRef}
       onMouseDown={(e: MouseEvent) => e.preventDefault()}
     >
       <Content>
-				<Flex css={{ justifyContent: "space-between" }}>
+        <Flex css={{ justifyContent: "space-between" }}>
           <Icon>
             <LogoIcon />
           </Icon>
@@ -80,11 +80,11 @@ export const Sidebar = ({ children }) => {
 };
 
 const Container = styled("div", {
-	width: "100%", 
+  width: "100%",
   display: "flex",
   background: "$bg",
   borderRight: "3px solid $bg1",
-	overflowX: "hidden"
+  overflowX: "hidden",
 });
 
 const Content = styled("div", {
