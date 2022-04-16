@@ -4,6 +4,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "generate": "npx prisma generate && npx graphql-codegen --config graphqlcodegen.yml",
     "generate:codegen": "graphql-codegen --config graphqlcodegen.yml",
     "generate:prisma": "prisma generate"
   },

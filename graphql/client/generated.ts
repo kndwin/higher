@@ -90,6 +90,11 @@ export type QueryModulesArgs = {
   where?: InputMaybe<ModuleWhereInput>;
 };
 
+export enum QueryMode {
+  Default = 'default',
+  Insensitive = 'insensitive'
+}
+
 export enum SortOrder {
   Asc = 'asc',
   Desc = 'desc'
@@ -104,6 +109,7 @@ export type StringFilter = {
   in?: InputMaybe<Array<Scalars['String']>>;
   lt?: InputMaybe<Scalars['String']>;
   lte?: InputMaybe<Scalars['String']>;
+  mode?: InputMaybe<QueryMode>;
   not?: InputMaybe<NestedStringFilter>;
   notIn?: InputMaybe<Array<Scalars['String']>>;
   startsWith?: InputMaybe<Scalars['String']>;
