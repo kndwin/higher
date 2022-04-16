@@ -2,13 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "target": "es2018",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext",
-      "ES2018",
-      "ESNext.AsyncIterable"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext", "ES2018", "ESNext.AsyncIterable"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "allowJs": true,
@@ -24,12 +18,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }

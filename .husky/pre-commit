@@ -1,0 +1,37 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo '👷 Running checks...'
+
+yarn run husky:check-types
+
+# Check Prettier standards
+yarn run husky:check-format ||
+(
+    echo '❌ Prettier Check Failed.';
+    echo 'Please run "yarn run husky:fix-prettier" to fix the issues.';
+    false;
+)
+
+# Check ESLint Standards
+yarn run husky:check-lint ||
+(
+	echo '❌ ESLint Check Failed.'
+	false; 
+)
+
+# Check tsconfig standards
+yarn run husky:check-types ||
+(
+    echo '❌ Type Check Failed.'
+    false;
+)
+
+yarn run build ||
+(
+    echo '❌ Build Failed.'
+    false;
+)
+
+# If everything passes... Now we can commit
+echo '✅ All checks passed!'

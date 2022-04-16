@@ -30,9 +30,9 @@ const ArrowUp = () => (
         y2="33.3695"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#0894B3" />
-        <stop offset="0.577926" stop-color="#84CDDA" />
-        <stop offset="0.953125" stop-color="white" />
+        <stop stopColor="#0894B3" />
+        <stop offset="0.577926" stopColor="#84CDDA" />
+        <stop offset="0.953125" stopColor="white" />
       </linearGradient>
     </defs>
   </svg>
@@ -63,9 +63,9 @@ const ArrowUpWithText = () => (
         y2="18.6847"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#0894B3" />
-        <stop offset="0.577926" stop-color="#84CDDA" />
-        <stop offset="0.953125" stop-color="white" />
+        <stop stopColor="#0894B3" />
+        <stop offset="0.577926" stopColor="#84CDDA" />
+        <stop offset="0.953125" stopColor="white" />
       </linearGradient>
       <linearGradient
         id="paint1_linear_7_194"
@@ -75,8 +75,8 @@ const ArrowUpWithText = () => (
         y2="29.3849"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#0894B3" />
-        <stop offset="1" stop-color="#84CDDA" />
+        <stop stopColor="#0894B3" />
+        <stop offset="1" stopColor="#84CDDA" />
       </linearGradient>
     </defs>
   </svg>

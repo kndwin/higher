@@ -1,11 +1,11 @@
 import "reflect-metadata";
 import Cors from "micro-cors";
 import { ApolloServer } from "apollo-server-micro";
-import { schema } from 'graphql/server/schema';
-import { prisma } from 'prisma/client';
+import { schema } from "graphql/server/schema";
+import { prisma } from "prisma/client";
 
 const apolloServer = new ApolloServer({
-  schema ,
+  schema,
   context: () => ({ prisma }),
 });
 
