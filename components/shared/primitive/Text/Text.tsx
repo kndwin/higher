@@ -15,6 +15,10 @@ export const Text = styled("p", {
         fontSize: "$5",
         fontWeight: "600",
       },
+      h2: {
+        fontSize: "$4",
+        fontWeight: "400",
+      },
     },
   },
 });

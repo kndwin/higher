@@ -18,7 +18,11 @@ TBD...
 **Server:**
 - **GraphQL Server:** NextJS API, apollo-graphql-micro
 - **ORM**: Prisma, typegraphql-codegen
-- **Database**: TBD
+- **Database**: MySQL (planetscale)
+
+**Others:**
+- **Testing**: Cypress (e2e, integration + unit test), Ladel (UI Stories)
+- **Analytics**: Umami
 
 
 ## Authors
