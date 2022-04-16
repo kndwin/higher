@@ -36,13 +36,16 @@ export const {
       5: "40px",
       6: "60px",
     },
+		radii: {
+			1: "8px", 
+		},
     sizes: {
-      1: "5px",
-      2: "10px",
-      3: "15px",
-      4: "20px",
-      5: "25px",
-      6: "35px",
+      1: "4px",
+      2: "8px",
+      3: "16px",
+      4: "32px",
+      5: "40px",
+      6: "64px",
     },
     fontSizes: {
       1: "10px",
@@ -80,6 +83,30 @@ export const {
     my: (value: string) => ({
       marginTop: value,
       marginBottom: value,
+    }),
+    // Abbreviated padding properties
+    p: (value: string) => ({
+      padding: value,
+    }),
+    pt: (value: string) => ({
+      paddingTop: value,
+    }),
+    pr: (value: string) => ({
+      paddingRight: value,
+    }),
+    pb: (value: string) => ({
+      paddingBottom: value,
+    }),
+    pl: (value: string) => ({
+      paddingLeft: value,
+    }),
+    px: (value: string) => ({
+      paddingLeft: value,
+      paddingRight: value,
+    }),
+    py: (value: string) => ({
+      paddingTop: value,
+      paddingBottom: value,
     }),
 
     // A property for applying width/height together

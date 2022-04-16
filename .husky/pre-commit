@@ -9,7 +9,7 @@ yarn run husky:check-types
 yarn run husky:check-format ||
 (
     echo '❌ Prettier Check Failed.';
-    echo 'Please run "yarn run husky:fix-prettier" to fix the issues.';
+    echo 'Please run "yarn run husky:fix-format" to fix the issues.';
     false;
 )
 

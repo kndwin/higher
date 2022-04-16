@@ -5,5 +5,14 @@ export const Button = styled("button", {
   fontSize: "$2",
   px: "$3",
   py: "$2",
-  backgroundColor: "$primary",
+	border: "none", 
+	br: "$1", 
+  backgroundColor: "$fg",
+	color: "$bg",
+	display: "flex", 
+	alignItems: "center",
+	cursor: "pointer", 
+	'&:hover': {
+		background: "$primary",
+	}
 });

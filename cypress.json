@@ -1,5 +1,5 @@
 {
-	"video": false,
+  "video": false,
   "component": {
     "componentFolder": "components",
     "testFiles": "**/*.spec.tsx"

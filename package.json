@@ -12,10 +12,10 @@
     "husky:check-lint": "next lint --ext .ts,.tsx,.js,.jsx .",
     "husky:check-format": "npx prettier --check .",
     "husky:fix-lint": "next lint --ext .ts,.tsx,.js,.jsx . --fix",
-    "husky:fix-pretter": "npx prettier --write .",
-    "cypress:e2e": "cypress open", 
-    "cypress:unit": "cypress open-ct", 
-    "cypress:run:e2e": "cypress run", 
+    "husky:fix-format": "npx prettier --write .",
+    "cypress:e2e": "cypress open",
+    "cypress:unit": "cypress open-ct",
+    "cypress:run:e2e": "cypress run",
     "cypress:run:unit": "cypress run-ct"
   },
   "dependencies": {
