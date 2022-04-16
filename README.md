@@ -1,4 +1,4 @@
-![Logo](./public/logo.svg)
+<img src="./public/logo.svg" width="100%" />
 
 # Higher
 
