@@ -1,6 +1,10 @@
 import type { AppProps } from "next/app";
 import type { NextComponentType, NextPageContext } from "next";
 
+export interface AuthEnabledComponentConfig {
+  authenticationEnabled: boolean;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type ComponentWithAuth<PropsType = any> = React.FC<PropsType> &
   AuthEnabledComponentConfig;

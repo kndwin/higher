@@ -5,7 +5,6 @@ export const Icon = styled("div", {
   alignItems: "center",
   justifyContent: "center",
   br: "$1",
-  size: "$4",
   minSize: "$4",
   "&:hover": {
     cursor: "pointer",
@@ -13,15 +12,25 @@ export const Icon = styled("div", {
   variants: {
     type: {
       filled: {
-        backgroundColor: "$bg1",
+        backgroundColor: "$slate3",
         "&:hover": {
-          backgroundColor: "$bg2",
+          backgroundColor: "$slate4",
+        },
+        "&:active": {
+          backgroundColor: "$slate5",
+        },
+      },
+			hover: {
+        "&:hover": {
+          backgroundColor: "$slate4",
         },
       },
       outlined: {
-        borderColor: "$bg2",
+				borderWidth: 1,
+				borderStyle: "solid", 
+        borderColor: "$slate6",
         "&:hover": {
-          backgroundColor: "$bg1",
+          backgroundColor: "$slate1",
         },
       },
     },

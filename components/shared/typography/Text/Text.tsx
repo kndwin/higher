@@ -3,6 +3,9 @@ import { styled } from "stitches.config";
 export const Text = styled("p", {
   fontFamily: "$primary",
   fontSize: "$2",
+  margin: 0,
+	whiteSpace: "pre-wrap",
+  lineHeight: "1.2em",
   variants: {
     title: {
       true: {
@@ -19,6 +22,8 @@ export const Text = styled("p", {
         fontSize: "$4",
         fontWeight: "400",
       },
+			label: {
+			}
     },
   },
   compoundVariants: [

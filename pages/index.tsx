@@ -8,11 +8,13 @@ export default function Home() {
       <Text title as="h1" css={{ mt: "$6" }}>
         {`Higher`}
       </Text>
-      <Text as="h1">{`The research assistance`}</Text>
-      <Button onClick={() => signIn("google", { callbackUrl: "/dashboard" })}>
-        <Icon css={{ mr: "$2" }}>
-          <PaperPlaneIcon />
-        </Icon>
+      <Text
+        css={{ fontSize: "$5", marginBottom: "$3" }}
+      >{`The research assistance`}</Text>
+      <Button
+        data-cy="login"
+        onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
+      >
         {`Try for free`}
       </Button>
     </Container>

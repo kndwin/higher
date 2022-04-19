@@ -1,0 +1,14 @@
+query GetModules {
+  modules {
+    id
+    name
+    type
+  }
+}
+
+mutation CreateModule($data: ModuleCreateInput!) {
+  createModule(data: $data) {
+    name
+    type
+  }
+}

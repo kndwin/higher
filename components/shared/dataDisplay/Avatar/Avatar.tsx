@@ -21,6 +21,9 @@ const StyledImage = styled(AvatarPrimitive.Image, {
   height: "100%",
   objectFit: "cover",
   borderRadius: "100%",
+	borderWidth: 1,
+	borderStyle: "solid",
+	borderColor: "$fg",
 });
 
 const StyledFallback = styled(AvatarPrimitive.Fallback, {

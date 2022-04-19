@@ -5,21 +5,23 @@ import { Sidebar } from "./Sidebar";
 import { Header } from "./Header";
 
 interface ContextProps {
-  sidebarWidth: number;
-  setSidebarWidth: (width: number) => void;
+  sidebarWidth: number | string;
+  setSidebarWidth: (width: number | string) => void;
   isSidebarOpen: boolean;
   setIsSidebarOpen: (isOpen: boolean) => void;
 }
 export const ContainerContext: Context<ContextProps> = createContext(null);
 
 export enum SIDEBAR_WIDTH {
-  MIN = 260,
-  MAX = 500,
+  MIN = 200,
+  MAX = "30em",
 }
 
 export const Container = ({ children, ...props }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [sidebarWidth, setSidebarWidth] = useState(SIDEBAR_WIDTH.MIN);
+  const [sidebarWidth, setSidebarWidth] = useState<number | string>(
+    SIDEBAR_WIDTH.MIN
+  );
 
   return (
     <ContainerContext.Provider

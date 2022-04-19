@@ -4,7 +4,7 @@ import { HomeIcon, ChevronIcon } from "components/icons";
 export const Header = () => {
   return (
     <Container.Header>
-      <Flex>
+			<Flex css={{ gap: "$2"}}>
         <Icon>
           <HomeIcon />
         </Icon>

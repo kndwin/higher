@@ -1,15 +1,9 @@
-import { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-node/core";
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -20,16 +14,16 @@ export type Scalars = {
 };
 
 export type Module = {
-  __typename?: "Module";
-  id: Scalars["String"];
-  name: Scalars["String"];
-  type: Scalars["String"];
+  __typename?: 'Module';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  type: Scalars['String'];
 };
 
 export type ModuleCreateInput = {
-  id?: InputMaybe<Scalars["String"]>;
-  name: Scalars["String"];
-  type: Scalars["String"];
+  id?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  type: Scalars['String'];
 };
 
 export type ModuleOrderByWithRelationInput = {
@@ -39,9 +33,9 @@ export type ModuleOrderByWithRelationInput = {
 };
 
 export enum ModuleScalarFieldEnum {
-  Id = "id",
-  Name = "name",
-  Type = "type",
+  Id = 'id',
+  Name = 'name',
+  Type = 'type'
 }
 
 export type ModuleWhereInput = {
@@ -54,101 +48,79 @@ export type ModuleWhereInput = {
 };
 
 export type ModuleWhereUniqueInput = {
-  id?: InputMaybe<Scalars["String"]>;
+  id?: InputMaybe<Scalars['String']>;
 };
 
 export type Mutation = {
-  __typename?: "Mutation";
+  __typename?: 'Mutation';
   createModule: Module;
 };
+
 
 export type MutationCreateModuleArgs = {
   data: ModuleCreateInput;
 };
 
 export type NestedStringFilter = {
-  contains?: InputMaybe<Scalars["String"]>;
-  endsWith?: InputMaybe<Scalars["String"]>;
-  equals?: InputMaybe<Scalars["String"]>;
-  gt?: InputMaybe<Scalars["String"]>;
-  gte?: InputMaybe<Scalars["String"]>;
-  in?: InputMaybe<Array<Scalars["String"]>>;
-  lt?: InputMaybe<Scalars["String"]>;
-  lte?: InputMaybe<Scalars["String"]>;
+  contains?: InputMaybe<Scalars['String']>;
+  endsWith?: InputMaybe<Scalars['String']>;
+  equals?: InputMaybe<Scalars['String']>;
+  gt?: InputMaybe<Scalars['String']>;
+  gte?: InputMaybe<Scalars['String']>;
+  in?: InputMaybe<Array<Scalars['String']>>;
+  lt?: InputMaybe<Scalars['String']>;
+  lte?: InputMaybe<Scalars['String']>;
   not?: InputMaybe<NestedStringFilter>;
-  notIn?: InputMaybe<Array<Scalars["String"]>>;
-  startsWith?: InputMaybe<Scalars["String"]>;
+  notIn?: InputMaybe<Array<Scalars['String']>>;
+  startsWith?: InputMaybe<Scalars['String']>;
 };
 
 export type Query = {
-  __typename?: "Query";
+  __typename?: 'Query';
   modules: Array<Module>;
 };
+
 
 export type QueryModulesArgs = {
   cursor?: InputMaybe<ModuleWhereUniqueInput>;
   distinct?: InputMaybe<Array<ModuleScalarFieldEnum>>;
   orderBy?: InputMaybe<Array<ModuleOrderByWithRelationInput>>;
-  skip?: InputMaybe<Scalars["Int"]>;
-  take?: InputMaybe<Scalars["Int"]>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<ModuleWhereInput>;
 };
 
 export enum SortOrder {
-  Asc = "asc",
-  Desc = "desc",
+  Asc = 'asc',
+  Desc = 'desc'
 }
 
 export type StringFilter = {
-  contains?: InputMaybe<Scalars["String"]>;
-  endsWith?: InputMaybe<Scalars["String"]>;
-  equals?: InputMaybe<Scalars["String"]>;
-  gt?: InputMaybe<Scalars["String"]>;
-  gte?: InputMaybe<Scalars["String"]>;
-  in?: InputMaybe<Array<Scalars["String"]>>;
-  lt?: InputMaybe<Scalars["String"]>;
-  lte?: InputMaybe<Scalars["String"]>;
+  contains?: InputMaybe<Scalars['String']>;
+  endsWith?: InputMaybe<Scalars['String']>;
+  equals?: InputMaybe<Scalars['String']>;
+  gt?: InputMaybe<Scalars['String']>;
+  gte?: InputMaybe<Scalars['String']>;
+  in?: InputMaybe<Array<Scalars['String']>>;
+  lt?: InputMaybe<Scalars['String']>;
+  lte?: InputMaybe<Scalars['String']>;
   not?: InputMaybe<NestedStringFilter>;
-  notIn?: InputMaybe<Array<Scalars["String"]>>;
-  startsWith?: InputMaybe<Scalars["String"]>;
+  notIn?: InputMaybe<Array<Scalars['String']>>;
+  startsWith?: InputMaybe<Scalars['String']>;
 };
 
-export type ModulesQueryVariables = Exact<{ [key: string]: never }>;
+export type GetModulesQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type ModulesQuery = {
-  __typename?: "Query";
-  modules: Array<{
-    __typename?: "Module";
-    id: string;
-    name: string;
-    type: string;
-  }>;
-};
 
-export const ModulesDocument = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "query",
-      name: { kind: "Name", value: "Modules" },
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "modules" },
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
-                { kind: "Field", name: { kind: "Name", value: "type" } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<ModulesQuery, ModulesQueryVariables>;
+export type GetModulesQuery = { __typename?: 'Query', modules: Array<{ __typename?: 'Module', id: string, name: string, type: string }> };
+
+export type CreateModuleMutationVariables = Exact<{
+  data: ModuleCreateInput;
+}>;
+
+
+export type CreateModuleMutation = { __typename?: 'Mutation', createModule: { __typename?: 'Module', name: string, type: string } };
+
+
+export const GetModulesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetModules"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"modules"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}}]}}]} as unknown as DocumentNode<GetModulesQuery, GetModulesQueryVariables>;
+export const CreateModuleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateModule"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ModuleCreateInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createModule"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}}]}}]} as unknown as DocumentNode<CreateModuleMutation, CreateModuleMutationVariables>;

@@ -1,17 +1,21 @@
 import Script from "next/script";
 import { globalStyles } from "stitches.config";
-import { SessionProvider, useSession } from "next-auth/react";
 import type { ProtectedAppProps } from "types/auth";
+
+import { Auth, SuperProviders } from "components/providers";
 
 export interface AuthEnabledComponentConfig {
   authenticationEnabled: boolean;
 }
+const ConditionalWrapper = ({ condtion, wrapper, children }) =>
+  condtion ? wrapper(children) : children;
 
 export default function MyApp({
   Component,
   pageProps: { session, ...pageProps },
 }: ProtectedAppProps) {
   globalStyles();
+
   return (
     <>
       <Script
@@ -20,26 +24,15 @@ export default function MyApp({
         data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
         src={process.env.NEXT_PUBLIC_UMAMI_SRC_URL}
       />
-      <SessionProvider session={session}>
-        {Component?.authenticationEnabled ? (
-          <Auth>
-            <Component {...pageProps} />
-          </Auth>
-        ) : (
+      <SuperProviders>
+        <ConditionalWrapper
+          condtion={Component?.authenticationEnabled}
+          wrapper={(children) => <Auth>{children}</Auth>}
+        >
           <Component {...pageProps} />
-        )}
-      </SessionProvider>
+        </ConditionalWrapper>
+      </SuperProviders>
     </>
   );
 }
 
-function Auth({ children }) {
-  // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
-  const { status } = useSession({ required: true });
-
-  if (status === "loading") {
-    return null;
-  }
-
-  return children;
-}

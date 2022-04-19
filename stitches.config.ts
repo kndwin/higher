@@ -1,4 +1,5 @@
 import { createStitches } from "@stitches/react";
+import { slate, slateDark, red, cyan, grass, amber } from "@radix-ui/colors";
 import type * as Stitches from "@stitches/react";
 
 export const {
@@ -12,21 +13,20 @@ export const {
 } = createStitches({
   theme: {
     colors: {
-      primary: "linear-gradient(99.26deg, #0894B3 0%, #84CDDA 107.7%)",
+      ...slate,
+      ...red,
+      ...cyan,
+      ...grass,
+      ...amber,
+      primaryGradient: "linear-gradient(99.26deg, #0894B3 0%, #84CDDA 107.7%)",
+      primary: "$cyan10",
+      error: "$red10",
+      success: "$grass10",
+      warning: "$amber10",
       hlPeach: "#FFA4A4",
       hlAmber: "#FFF1A3",
       hlGrass: "#C2FFA3",
-      hlSkyblue: "#A3D9FF",
-      fg: "#11181C",
-      fg1: "#7E868C",
-      fg2: "#C1C8CD",
-      bg2: "#E6E8EB",
-      bg1: "#F1F3F5",
-      bg: "#FBFCFD",
-      red9: "#E5484D",
-      red6: "#F9C6C6",
-      cyan10: "#0894B3",
-      cyan6: "#AADEE6",
+      hlSkyblue: "#A3D9F",
     },
     space: {
       1: "4px",
@@ -37,7 +37,9 @@ export const {
       6: "60px",
     },
     radii: {
-      1: "8px",
+      1: "4px",
+      2: "8px",
+			round: "9999px"
     },
     sizes: {
       1: "4px",
@@ -57,6 +59,11 @@ export const {
     },
     fonts: {
       primary: `"Inter", sans-serif`,
+    },
+    shadows: {
+      1: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+      2: "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+      3: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
     },
   },
   utils: {
@@ -128,6 +135,13 @@ export const {
     br: (value: string) => ({
       borderRadius: value,
     }),
+		gridRow: (value: string) => ({
+			gridTemplateRows: value,
+		}),
+		gridCol: (value: string) => ({
+			gridTemplateColumns: value,
+		}),
+
   },
   media: {
     bp1: "(min-width: 520px)",
@@ -143,5 +157,5 @@ export const globalStyles = globalCss({
   "*": {
     boxSizing: "border-box",
   },
-  "@import": `url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap")`,
+  "@import": `url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap")`,
 });

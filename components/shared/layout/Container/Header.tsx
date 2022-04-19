@@ -16,9 +16,9 @@ export const Header = ({ children }) => {
     setSidebarWidth(SIDEBAR_WIDTH.MIN);
   };
   return (
-    <StyledHeader>
+		<StyledHeader data-cy="dashboard-header">
       <Flex css={{ justifyContent: "space-between" }}>
-        <Flex css={{ gap: "$2", ml: "$2", width: "fit-content" }}>
+        <Flex css={{ gap: "$2",  width: "fit-content" }}>
           {!isSidebarOpen && (
             <Icon type="filled" onClick={() => handleSidebarOpen()}>
               <DoubleChevronIcon orientation="right" />
@@ -26,7 +26,7 @@ export const Header = ({ children }) => {
           )}
           {children}
         </Flex>
-        <Profile />
+        <DropdownMenuProfile />
       </Flex>
     </StyledHeader>
   );
@@ -36,11 +36,12 @@ const StyledHeader = styled("header", {
   width: "100%",
   display: "flex",
   alignItems: "center",
-  background: "$bg",
-  p: "$2",
+  background: "white",
+  py: "$3",
+	px: "$3"
 });
 
-const Profile = () => {
+const DropdownMenuProfile = () => {
   const { data: session } = useSession();
 
   return (

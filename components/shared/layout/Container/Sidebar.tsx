@@ -82,8 +82,8 @@ export const Sidebar = ({ children }) => {
 const Container = styled("div", {
   width: "100%",
   display: "flex",
-  background: "$bg",
-  borderRight: "3px solid $bg1",
+  background: "white",
+  borderRight: "3px solid $slate2",
   overflowX: "hidden",
 });
 
@@ -103,6 +103,6 @@ const Resizer = styled("div", {
   cursor: "col-resize",
   resize: "horizontal",
   "&:hover": {
-    background: "$bg2",
+    background: "$slate2",
   },
 });
