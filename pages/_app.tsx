@@ -1,14 +1,12 @@
 import Script from "next/script";
 import { globalStyles } from "stitches.config";
-import type { ProtectedAppProps } from "types/auth";
+import type { ProtectedAppProps } from "types/auth.d";
+import type { ReactNode } from "react";
 
 import { Auth, SuperProviders } from "components/providers";
+import { ConditionalWrapper } from "components/shared";
 
-export interface AuthEnabledComponentConfig {
-  authenticationEnabled: boolean;
-}
-const ConditionalWrapper = ({ condtion, wrapper, children }) =>
-  condtion ? wrapper(children) : children;
+import "pdfjs-dist/web/pdf_viewer.css";
 
 export default function MyApp({
   Component,
@@ -27,7 +25,7 @@ export default function MyApp({
       <SuperProviders>
         <ConditionalWrapper
           condtion={Component?.authenticationEnabled}
-          wrapper={(children) => <Auth>{children}</Auth>}
+          wrapper={(children: ReactNode) => <Auth>{children}</Auth>}
         >
           <Component {...pageProps} />
         </ConditionalWrapper>
@@ -35,4 +33,3 @@ export default function MyApp({
     </>
   );
 }
-

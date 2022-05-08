@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "typeRoots": ["./types"],
     "baseUrl": ".",
     "target": "es2018",
     "lib": ["dom", "dom.iterable", "esnext", "ES2018", "ESNext.AsyncIterable"],

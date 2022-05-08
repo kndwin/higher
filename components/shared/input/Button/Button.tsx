@@ -1,13 +1,13 @@
-import {keyframes} from "@stitches/react";
+import { keyframes } from "@stitches/react";
 import { styled } from "stitches.config";
 
 const spin = keyframes({
-	"0%": {
-		transform: "rotate(0deg)",
-	},
-	"100%": {
-		transform: "rotate(360deg)",
-	},
+  "0%": {
+    transform: "rotate(0deg)",
+  },
+  "100%": {
+    transform: "rotate(360deg)",
+  },
 });
 
 export const Button = styled("button", {
@@ -23,15 +23,32 @@ export const Button = styled("button", {
   alignItems: "center",
   cursor: "pointer",
   transition: "all 0.2s ease-in-out",
-	position: "relative",
+  position: "relative",
   "&:hover": {
     backgroundColor: "$slate4",
   },
   "&:active": {
     backgroundColor: "$slate5",
   },
+  "&:focus": {
+    outlineWidth: 1,
+  },
   variants: {
     color: {
+      secondary: {
+        backgroundColor: "$slate4",
+        color: "$slate11",
+        fontWeight: 500,
+        "&:hover": {
+          backgroundColor: "$slate5",
+        },
+        "&:active": {
+          backgroundColor: "$slate6",
+        },
+        "&:focus": {
+          outlineColor: "$slate7",
+        },
+      },
       error: {
         backgroundColor: "$red4",
         color: "$red11",
@@ -41,6 +58,9 @@ export const Button = styled("button", {
         },
         "&:active": {
           backgroundColor: "$red6",
+        },
+        "&:focus": {
+          outlineColor: "$red7",
         },
       },
       accent: {
@@ -52,6 +72,22 @@ export const Button = styled("button", {
         "&:active": {
           backgroundColor: "$cyan6",
         },
+        "&:focus": {
+          outlineColor: "$cyan7",
+        },
+      },
+      success: {
+        backgroundColor: "$grass4",
+        color: "$grass11",
+        "&:hover": {
+          backgroundColor: "$grass5",
+        },
+        "&:active": {
+          backgroundColor: "$grass6",
+        },
+        "&:focus": {
+          outlineColor: "$grass7",
+        },
       },
     },
     state: {
@@ -59,29 +95,43 @@ export const Button = styled("button", {
       disabled: {
         opacity: 0.5,
         cursor: "none",
-				pointerEvents: "none",
+        pointerEvents: "none",
       },
       loading: {
         opacity: 0.5,
         cursor: "none",
-				pointerEvents: "none",
-				"&::before": {
-					content: "''",
-					size: "$3",
-					mr: "$3", 
-					backgroundColor: "$slate3",
-					borderRadius: "$round",
-					borderWidth: "$2", 
-					borderStyle: "solid", 
-					borderTopColor: "$cyan7",
-					borderRightColor: "$cyan7",
-					borderBottomColor: "$cyan7",
-					borderLetColor: "$cyan8",
-					animation: `${spin} 1.2s linear infinite`,
-				}
+        pointerEvents: "none",
+        "&::before": {
+          content: "''",
+          size: "$3",
+          mr: "$3",
+          backgroundColor: "$slate3",
+          borderRadius: "$round",
+          borderWidth: "$2",
+          borderStyle: "solid",
+          borderTopColor: "$cyan7",
+          borderRightColor: "$cyan7",
+          borderBottomColor: "$cyan7",
+          borderLeftColor: "$cyan8",
+          animation: `${spin} 1.2s linear infinite`,
+        },
       },
     },
   },
+  compoundVariants: [
+    {
+      color: "error",
+      state: "loading",
+      css: {
+        "&::before": {
+          borderTopColor: "$red7",
+          borderRightColor: "$red7",
+          borderBottomColor: "$red7",
+          borderLeftColor: "$red8",
+        },
+      },
+    },
+  ],
   defaultVariants: {
     color: "accent",
   },

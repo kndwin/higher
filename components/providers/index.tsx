@@ -2,13 +2,14 @@ import { useSession } from "next-auth/react";
 import { SessionProvider } from "next-auth/react";
 import { Provider as GraphQLClientProvider } from "urql";
 import { client as graphqlClient } from "graphql/client";
-import { Provider as ToastProvider } from '@radix-ui/react-toast'
+import { Provider as ToastProvider } from "@radix-ui/react-toast";
+import { Provider as TooltipProvider } from "@radix-ui/react-tooltip";
+import type { ReactNode, FC } from "react";
+import type { Session } from "next-auth";
 
-const composeWrappers = (
-  wrappers: React.FunctionComponent[]
-): React.FunctionComponent => {
-  return wrappers.reduce((Acc, Current): React.FunctionComponent => {
-    return (props) => (
+const composeWrappers = (wrappers: FC[]): FC => {
+  return wrappers.reduce((Acc: FC, Current: any) => {
+    return (props: any) => (
       <Current>
         <Acc {...props} />
       </Current>
@@ -16,20 +17,21 @@ const composeWrappers = (
   });
 };
 
-export const SuperProviders = composeWrappers([
-  (props) => (
-    <SessionProvider session={props.session}>{props.children}</SessionProvider>
+export const SuperProviders: any = composeWrappers([
+  ({ session, children }: { session: Session; children: JSX.Element }) => (
+    <SessionProvider session={session}>{children}</SessionProvider>
   ),
-  (props) => (
+  ({ children }: { children: JSX.Element }) => (
     <GraphQLClientProvider value={graphqlClient}>
-      {props.children}
+      {children}
     </GraphQLClientProvider>
   ),
-	(props) => (
-		<ToastProvider>
-			{props.children}
-		</ToastProvider>
-	)
+  ({ children }: { children: JSX.Element }) => (
+    <ToastProvider>{children}</ToastProvider>
+  ),
+  ({ children }: { children: JSX.Element }) => (
+    <TooltipProvider>{children}</TooltipProvider>
+  ),
 ]);
 
 export const Auth = ({ children }) => {
@@ -41,4 +43,4 @@ export const Auth = ({ children }) => {
   }
 
   return children;
-}
+};

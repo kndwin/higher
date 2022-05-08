@@ -1,16 +1,17 @@
-import { Container, Flex, Icon, Text } from "components/shared";
-import { HomeIcon, ChevronIcon } from "components/icons";
+import { Container, Breadcrumbs } from "components/shared";
+import { HomeIcon, BoxIcon } from "components/icons";
 
 export const Header = () => {
+  const items = [
+    {
+      icon: <HomeIcon />,
+      label: "Home",
+      href: "/dashboard",
+    },
+  ];
   return (
     <Container.Header>
-			<Flex css={{ gap: "$2"}}>
-        <Icon>
-          <HomeIcon />
-        </Icon>
-
-        <Text>{`Home`}</Text>
-      </Flex>
+      <Breadcrumbs items={items} />
     </Container.Header>
   );
 };

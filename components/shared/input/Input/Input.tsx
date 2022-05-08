@@ -14,13 +14,13 @@ export const Input = styled("input", {
   transition: "all 0.2s ease-in-out",
   borderWidth: 1,
   borderStyle: "solid",
-  borderColor: "$slate12",
+  borderColor: "$slate7",
 
   "&:focus, &:focus-visible, &:hover": {
-    borderColor: "$slate12",
+    borderColor: "$slate8",
   },
 
-	"&:focus-visible": {
-		outline: "none", 
-	},
+  "&:focus-visible": {
+    outline: "none",
+  },
 });

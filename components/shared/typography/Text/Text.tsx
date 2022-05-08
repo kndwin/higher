@@ -4,7 +4,7 @@ export const Text = styled("p", {
   fontFamily: "$primary",
   fontSize: "$2",
   margin: 0,
-	whiteSpace: "pre-wrap",
+  whiteSpace: "pre-wrap",
   lineHeight: "1.2em",
   variants: {
     title: {
@@ -22,8 +22,10 @@ export const Text = styled("p", {
         fontSize: "$4",
         fontWeight: "400",
       },
-			label: {
-			}
+      h3: {},
+      label: {},
+      span: {},
+      li: {},
     },
   },
   compoundVariants: [

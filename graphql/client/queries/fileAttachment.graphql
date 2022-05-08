@@ -1,0 +1,75 @@
+query FileAttachments($where: FileAttachmentWhereInput) {
+  fileAttachments(where: $where) {
+    id
+    fileUrl
+    moduleId
+    highlights
+  }
+}
+
+mutation CreateFileAttachment($data: FileAttachmentCreateInput!) {
+  createFileAttachment(data: $data) {
+    highlights
+    moduleId
+    fileUrl
+    id
+  }
+}
+
+mutation CreateManyFileAttachment(
+  $data: [FileAttachmentCreateManyInput!]!
+  $skipDuplicates: Boolean
+) {
+  createManyFileAttachment(data: $data, skipDuplicates: $skipDuplicates) {
+    count
+  }
+}
+
+mutation DeleteFileAttachment($where: FileAttachmentWhereUniqueInput!) {
+  deleteFileAttachment(where: $where) {
+    id
+    fileUrl
+    moduleId
+    highlights
+  }
+}
+
+mutation UpdateFileAttachment(
+  $data: FileAttachmentUpdateInput!
+  $where: FileAttachmentWhereUniqueInput!
+) {
+  updateFileAttachment(data: $data, where: $where) {
+    id
+    fileUrl
+    moduleId
+    highlights
+  }
+}
+
+mutation DeleteManyFileAttachment($where: FileAttachmentWhereInput) {
+  deleteManyFileAttachment(where: $where) {
+    count
+  }
+}
+
+mutation UpdateManyFileAttachment(
+  $data: FileAttachmentUpdateManyMutationInput!
+  $where: FileAttachmentWhereInput
+) {
+  updateManyFileAttachment(data: $data, where: $where) {
+    count
+  }
+}
+
+mutation UpsertFileAttachment(
+  $where: FileAttachmentWhereUniqueInput!
+  $create: FileAttachmentCreateInput!
+  $update: FileAttachmentUpdateInput!
+) {
+  upsertFileAttachment(where: $where, create: $create, update: $update) {
+    id
+    moduleId
+    fileUrl
+    highlights
+  }
+}

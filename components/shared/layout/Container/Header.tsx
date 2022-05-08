@@ -10,15 +10,16 @@ import { ContainerContext, SIDEBAR_WIDTH } from "./Container";
 export const Header = ({ children }) => {
   const { isSidebarOpen, setIsSidebarOpen, setSidebarWidth } =
     useContext(ContainerContext);
+
   const handleSidebarOpen = () => {
-    console.log("clicked");
     setIsSidebarOpen(true);
     setSidebarWidth(SIDEBAR_WIDTH.MIN);
   };
+
   return (
-		<StyledHeader data-cy="dashboard-header">
+    <StyledHeader data-cy="dashboard-header">
       <Flex css={{ justifyContent: "space-between" }}>
-        <Flex css={{ gap: "$2",  width: "fit-content" }}>
+        <Flex css={{ gap: "$2", width: "fit-content" }}>
           {!isSidebarOpen && (
             <Icon type="filled" onClick={() => handleSidebarOpen()}>
               <DoubleChevronIcon orientation="right" />
@@ -36,9 +37,10 @@ const StyledHeader = styled("header", {
   width: "100%",
   display: "flex",
   alignItems: "center",
-  background: "white",
+  background: "$slate1",
   py: "$3",
-	px: "$3"
+  px: "$3",
+  borderBottom: "3px solid $slate4",
 });
 
 const DropdownMenuProfile = () => {
@@ -46,7 +48,7 @@ const DropdownMenuProfile = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenu.Trigger>
+      <DropdownMenu.Trigger css={{ br: "$round", p: 0 }}>
         <Avatar css={{ cursor: "pointer", size: "$4" }}>
           <Avatar.Image src={session?.user?.image} alt="User image" />
           <Avatar.Fallback delayMs={500}>{`NA`}</Avatar.Fallback>

@@ -1,26 +1,23 @@
 import { useForm } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
-import { useState, useId, useTransition, useEffect } from "react";
+import { useState, useId, useEffect } from "react";
 
 import { BoxIcon } from "components/icons";
-import {
-  Icon,
-  Button,
-  Text,
-  Input,
-  Dialog,
-  Grid,
-} from "components/shared";
+import { Icon, Button, Text, Input, Dialog, Grid } from "components/shared";
 import { ModuleCard } from "./shared";
-import { useModules } from "hooks";
+import { useFiles, useModules, useToast } from "hooks";
+
+import { ModuleCreateInput, ModuleType } from "graphql/client/generated";
+import { useSession } from "next-auth/react";
+import { nanoid } from "nanoid";
 
 const modules = [
   {
-    label: "research",
+    label: ModuleType.Research,
     icon: <BoxIcon />,
   },
   {
-    label: `note taking\n(Coming soon)`,
+    label: ModuleType.Note,
     icon: <BoxIcon />,
     disabled: true,
   },
@@ -31,40 +28,50 @@ type FormValues = {
 };
 
 export const DialogAddModule = () => {
-  const [loading, setLoading] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState("research");
+  const { setToast } = useToast();
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [selected, setSelected] = useState<ModuleType>(ModuleType.Research);
   const { createModule, createModuleResult } = useModules();
-  const id = useId();
+  const { data: session } = useSession();
 
   const { register, handleSubmit } = useForm();
+  const { newFolder } = useFiles();
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    setLoading(true);
-    try {
-      await createModule({
-        data: {
-          name: data.name,
-          type: selected,
+    const createModuleData: ModuleCreateInput = {
+      name: data.name,
+      type: selected,
+      user: {
+        connect: {
+          id: session?.user?.id,
         },
-      });
-      setIsOpen(false);
-    } catch (error) {
-      console.log({ error });
-    } finally {
-      setLoading(false);
-    }
+      },
+      fileStructure: [newFolder],
+    };
+    await createModule({ data: createModuleData });
+    setDialogOpen(false);
   };
 
   useEffect(() => {
-    console.log({ createModuleResult });
-		if (Boolean(createModuleResult.error)) {
-			setIsOpen(false);
-		}
+    if (Boolean(createModuleResult.error)) {
+      setDialogOpen(false);
+      setToast({
+        title: "Error",
+        description: "Something went wrong in creating the module",
+        color: "error",
+      });
+      console.log({ error: createModuleResult.error });
+    } else if (Boolean(createModuleResult.data)) {
+      setToast({
+        title: "Success",
+        description: "Module created successfully",
+        color: "success",
+      });
+    }
   }, [createModuleResult]);
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <Dialog.Trigger asChild>
         <Button>{`Add Module`}</Button>
       </Dialog.Trigger>
@@ -97,12 +104,12 @@ export const DialogAddModule = () => {
         <Grid css={{ gridTemplateColumns: "1fr 1fr", gridGap: "$3", mt: "$3" }}>
           <Dialog.Close asChild>
             <Button
-              state={loading ? "disabled" : "default"}
+              state={createModuleResult.fetching ? "disabled" : "default"}
               color="error"
             >{`Cancel`}</Button>
           </Dialog.Close>
           <Button
-            state={loading ? "loading" : "default"}
+            state={createModuleResult.fetching ? "loading" : "default"}
             color="accent"
             type="submit"
           >{`Submit`}</Button>

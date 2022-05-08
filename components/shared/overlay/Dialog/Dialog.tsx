@@ -26,6 +26,7 @@ const contentShow = keyframes({
 const StyledOverlay = styled(DialogPrimitive.Overlay, {
   backgroundColor: "rgba(0, 0, 0, 0.5)",
   position: "fixed",
+  zIndex: 2147483648,
   inset: 0,
   "@media (prefers-reduced-motion: no-preference)": {
     animation: `${overlayShow} 150ms cubic-bezier(0.16, 1, 0.3, 1) forwards`,
@@ -33,9 +34,10 @@ const StyledOverlay = styled(DialogPrimitive.Overlay, {
 });
 
 const StyledContent = styled(DialogPrimitive.Content, {
+  zIndex: 2147483649,
   backgroundColor: "white",
   borderRadius: "$2",
-  boxShadow: "$1", 
+  boxShadow: "$1",
   position: "fixed",
   top: "50%",
   left: "50%",
@@ -70,17 +72,18 @@ function Content({ children, ...props }) {
 }
 
 const StyledTitle = styled(DialogPrimitive.Title, {
-  margin: 0, 
-	fontFamily: "$primary",
-	fontSize: "$5",
-	fontWeight: "bold",
+  margin: 0,
+  fontFamily: "$primary",
+  fontSize: "$5",
+  fontWeight: "bold",
 });
 
 const StyledDescription = styled(DialogPrimitive.Description, {
   margin: "$2 0 $3",
-	fontFamily: "$primary",
+  fontFamily: "$primary",
   color: "$slate12",
   fontSize: "$3",
+  whiteSpace: "pre-wrap",
 });
 
 export const Dialog: DialogProps = DialogPrimitive.Root;

@@ -1,8 +1,12 @@
-import { useCallback, useRef, useState, useEffect } from "react";
+import { useState } from "react";
 import { Context, createContext } from "react";
 import { styled } from "stitches.config";
 import { Sidebar } from "./Sidebar";
 import { Header } from "./Header";
+import { StyledMain } from "./Main";
+import { Toast, Button, Icon } from "components/shared";
+import { useToast } from "hooks";
+import { CrossIcon } from "components/icons";
 
 interface ContextProps {
   sidebarWidth: number | string;
@@ -13,11 +17,16 @@ interface ContextProps {
 export const ContainerContext: Context<ContextProps> = createContext(null);
 
 export enum SIDEBAR_WIDTH {
-  MIN = 200,
-  MAX = "30em",
+  MIN = 0,
+  MAX = 1200,
 }
 
 export const Container = ({ children, ...props }) => {
+  const {
+    open: openToast,
+    setOpen: setOpenToast,
+    data: dataToast,
+  } = useToast();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [sidebarWidth, setSidebarWidth] = useState<number | string>(
     SIDEBAR_WIDTH.MIN
@@ -33,6 +42,38 @@ export const Container = ({ children, ...props }) => {
       }}
     >
       <StyledContainer {...props}>{children}</StyledContainer>
+      <Toast
+        duration={dataToast.durationInMs}
+        open={openToast}
+        onOpenChange={setOpenToast}
+        color={dataToast.color}
+      >
+        <Toast.Title>{dataToast.title}</Toast.Title>
+        <Toast.Description>{dataToast.description}</Toast.Description>
+        {dataToast.action && (
+          <Toast.Action asChild altText="action">
+            <Button color={dataToast.color} onClick={dataToast.action.onClick}>
+              {dataToast.action.label}
+            </Button>
+          </Toast.Action>
+        )}
+        {dataToast.close && (
+          <Toast.Close asChild>
+            <Icon
+              type="hover"
+              css={{
+                br: "9999px",
+                position: "absolute",
+                right: "$2",
+                top: "$2",
+              }}
+            >
+              <CrossIcon />
+            </Icon>
+          </Toast.Close>
+        )}
+      </Toast>
+      <Toast.Viewport />
     </ContainerContext.Provider>
   );
 };
@@ -64,3 +105,4 @@ const StyledContainer = styled("div", {
 
 Container.Sidebar = Sidebar;
 Container.Header = Header;
+Container.Main = StyledMain;

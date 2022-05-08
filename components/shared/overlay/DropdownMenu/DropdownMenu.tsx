@@ -1,15 +1,16 @@
-import React from "react";
+import type { FC } from "react";
+import type { ComponentProps } from "@stitches/react";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { styled } from "stitches.config";
 import { keyframes } from "@stitches/react";
 
-type DropdownMenuProps = React.FC<DropdownMenuPrimitive.DropdownMenuProps> & {
-  Trigger?: React.FC<DropdownMenuPrimitive.DropdownMenuTriggerProps>;
-  Content?: React.FC<DropdownMenuPrimitive.DropdownMenuContentProps>;
-  Item?: React.FC<DropdownMenuPrimitive.DropdownMenuItemProps>;
-  CheckboxItem?: React.FC<DropdownMenuPrimitive.DropdownMenuCheckboxItemProps>;
-  RadioItem?: React.FC<DropdownMenuPrimitive.DropdownMenuRadioItemProps>;
-  TriggerItem?: React.FC<DropdownMenuPrimitive.DropdownMenuTriggerItemProps>;
+type DropdownMenuProps = FC<DropdownMenuPrimitive.DropdownMenuProps> & {
+  Trigger?: FC<DropdownMenuPrimitive.DropdownMenuTriggerProps>;
+  Content?: FC<ComponentProps<typeof StyledContent>>;
+  Item?: FC<DropdownMenuPrimitive.DropdownMenuItemProps>;
+  CheckboxItem?: FC<DropdownMenuPrimitive.DropdownMenuCheckboxItemProps>;
+  RadioItem?: FC<DropdownMenuPrimitive.DropdownMenuRadioItemProps>;
+  TriggerItem?: FC<DropdownMenuPrimitive.DropdownMenuTriggerItemProps>;
 };
 
 export const DropdownMenu: DropdownMenuProps = DropdownMenuPrimitive.Root;
@@ -35,16 +36,15 @@ const slideLeftAndFade = keyframes({
 });
 
 const StyledTrigger = styled(DropdownMenuPrimitive.Trigger, {
-  all: "unset",
   border: "none",
   background: "transparent",
 });
 
 const StyledContent = styled(DropdownMenuPrimitive.Content, {
-  minWidth: 150,
-  backgroundColor: "$bg",
-  borderRadius: 6,
-  padding: 5,
+  minWidth: 120,
+  backgroundColor: "$slate2",
+  borderRadius: "$1",
+  padding: "$2",
   boxShadow:
     "0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2)",
   "@media (prefers-reduced-motion: no-preference)": {
@@ -59,13 +59,20 @@ const StyledContent = styled(DropdownMenuPrimitive.Content, {
       '&[data-side="left"]': { animationName: slideRightAndFade },
     },
   },
+  variants: {
+    color: {
+      dark: {
+        background: "$slate10",
+        color: "$slate1",
+      },
+    },
+  },
 });
 
 const itemStyles = {
-  all: "unset",
   fontSize: "$2",
   fontFamily: "$primary",
-  color: "$fg",
+  color: "$slate12",
   borderRadius: "4px",
   display: "flex",
   alignItems: "center",
@@ -77,13 +84,17 @@ const itemStyles = {
   cursor: "pointer",
 
   "&[data-disabled]": {
-    color: "$fg",
+    color: "$slate8",
     pointerEvents: "none",
   },
 
   "&:focus": {
-    backgroundColor: "$bg1",
-    color: "$fg",
+    backgroundColor: "$slate5",
+    outline: "1px solid $slate6",
+  },
+
+  "&:hover": {
+    backgroundColor: "$slate5",
   },
 };
 
@@ -99,8 +110,8 @@ const StyledRadioItem = styled(DropdownMenuPrimitive.RadioItem, {
 
 const StyledTriggerItem = styled(DropdownMenuPrimitive.TriggerItem, {
   '&[data-state="open"]': {
-    backgroundColor: "$fg1",
-    color: "$bg1",
+    backgroundColor: "$slate6",
+    color: "$slate12",
   },
   ...itemStyles,
 });

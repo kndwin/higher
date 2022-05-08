@@ -1,13 +1,20 @@
 import { useCallback, useRef, useState, useEffect, useContext } from "react";
-import type { MouseEvent } from "react";
+import type { MouseEvent, ReactNode } from "react";
 
 import { styled } from "stitches.config";
 import { Flex, Icon } from "components/shared";
 import { LogoIcon, DoubleChevronIcon } from "components/icons";
 
 import { SIDEBAR_WIDTH, ContainerContext } from "./Container";
+import { CSS } from "@stitches/react/types/css-util";
 
-export const Sidebar = ({ children }) => {
+export const Sidebar = ({
+  children,
+  css,
+}: {
+  children?: ReactNode;
+  css: CSS;
+}) => {
   const { setSidebarWidth, sidebarWidth, setIsSidebarOpen, isSidebarOpen } =
     useContext(ContainerContext);
   const sidebarRef = useRef(null);
@@ -56,9 +63,12 @@ export const Sidebar = ({ children }) => {
     <Container
       css={{
         transition: `${!isResizing && "all"} 0.2s ease-in-out`,
+        width: sidebarWidth,
         maxWidth: sidebarWidth,
+        minWidth: isSidebarOpen ? "fit-content" : 0,
         opacity: isSidebarOpen ? "1" : "0",
         borderWidth: isSidebarOpen ? "3px" : "0",
+        ...css,
       }}
       ref={sidebarRef}
       onMouseDown={(e: MouseEvent) => e.preventDefault()}
@@ -80,10 +90,11 @@ export const Sidebar = ({ children }) => {
 };
 
 const Container = styled("div", {
+  position: "relative",
   width: "100%",
   display: "flex",
-  background: "white",
-  borderRight: "3px solid $slate2",
+  background: "$slate1",
+  borderRight: "3px solid $slate4",
   overflowX: "hidden",
 });
 
@@ -92,17 +103,17 @@ const Content = styled("div", {
   display: "flex",
   flexDirection: "column",
   p: "$3",
-  pr: "$1",
 });
 
 const Resizer = styled("div", {
-  flexGrow: 0,
-  flexShrink: 0,
-  flexBasis: "$2",
+  position: "absolute",
+  right: 0,
+  width: "$2",
+  height: "100%",
   justifySelf: "flex-end",
   cursor: "col-resize",
   resize: "horizontal",
   "&:hover": {
-    background: "$slate2",
+    background: "$slate4",
   },
 });

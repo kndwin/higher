@@ -1,14 +1,10 @@
 import { Container, Flex, Text } from "components/shared";
 
 import { Header, Main } from "components/pages/Dashboard";
-import { ComponentWithAuth } from "types/auth";
 
-function Dashboard(): ComponentWithAuth {
+function DashboardPage() {
   return (
     <Container>
-      <Container.Sidebar>
-      </Container.Sidebar>
-
       <Flex css={{ flexDirection: "column", justifyItems: "start" }}>
         <Header />
         <Main />
@@ -16,6 +12,6 @@ function Dashboard(): ComponentWithAuth {
     </Container>
   );
 }
-export default Dashboard;
+export default DashboardPage;
 
-Dashboard.authenticationEnabled = true;
+DashboardPage.authenticationEnabled = true;

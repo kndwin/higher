@@ -1,5 +1,4 @@
 import { Container, Text, Button, Icon } from "components/shared";
-import { PaperPlaneIcon } from "components/icons";
 import { signIn } from "next-auth/react";
 
 export default function Home() {
@@ -10,7 +9,7 @@ export default function Home() {
       </Text>
       <Text
         css={{ fontSize: "$5", marginBottom: "$3" }}
-      >{`The research assistance`}</Text>
+      >{`The research assistant`}</Text>
       <Button
         data-cy="login"
         onClick={() => signIn("google", { callbackUrl: "/dashboard" })}

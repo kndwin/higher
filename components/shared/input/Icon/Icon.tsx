@@ -12,22 +12,23 @@ export const Icon = styled("div", {
   variants: {
     type: {
       filled: {
-        backgroundColor: "$slate3",
+        backgroundColor: "$slate4",
         "&:hover": {
-          backgroundColor: "$slate4",
+          backgroundColor: "$slate5",
         },
         "&:active": {
+          backgroundColor: "$slate6",
+        },
+      },
+      hover: {
+        background: "transparent",
+        "&:hover": {
           backgroundColor: "$slate5",
         },
       },
-			hover: {
-        "&:hover": {
-          backgroundColor: "$slate4",
-        },
-      },
       outlined: {
-				borderWidth: 1,
-				borderStyle: "solid", 
+        borderWidth: 1,
+        borderStyle: "solid",
         borderColor: "$slate6",
         "&:hover": {
           backgroundColor: "$slate1",

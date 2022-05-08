@@ -1,16 +1,16 @@
 import { styled } from "stitches.config";
 import { CheckIcon } from "components/icons";
-import {
-  Icon,
-} from "components/shared";
+import { Icon } from "components/shared";
+import type { CSS } from "@stitches/react";
+import type { MouseEventHandler } from "react";
 
 type ModuleCardProps = {
-	children: React.ReactNode;
-	selected?: boolean;
-	disabled?: boolean;
-	onSelection?: (selected: boolean) => void;
-	[props:string]: any
-}
+  children: React.ReactNode;
+  selected?: boolean;
+  disabled?: boolean;
+  onSelection?: () => void;
+  [props: string]: any;
+};
 
 export const ModuleCard = ({
   children,
@@ -19,7 +19,11 @@ export const ModuleCard = ({
   onSelection,
   ...props
 }: ModuleCardProps) => (
-  <StyledModule onClick={onSelection} selected={selected} disabled={disabled}>
+  <StyledModule
+    onClick={() => onSelection()}
+    selected={selected}
+    disabled={disabled}
+  >
     {selected && (
       <Icon
         type="outlined"

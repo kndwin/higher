@@ -1,14 +1,62 @@
-query GetModules {
+query Modules {
   modules {
     id
     name
     type
+    fileStructure
   }
 }
 
 mutation CreateModule($data: ModuleCreateInput!) {
   createModule(data: $data) {
+    id
     name
     type
+    fileStructure
+  }
+}
+
+mutation CreateManyModule(
+  $data: [ModuleCreateManyInput!]!
+  $skipDuplicates: Boolean
+) {
+  createManyModule(data: $data, skipDuplicates: $skipDuplicates) {
+    count
+  }
+}
+
+mutation UpdateModule(
+  $data: ModuleUpdateInput!
+  $where: ModuleWhereUniqueInput!
+) {
+  updateModule(data: $data, where: $where) {
+    id
+    name
+    type
+    fileStructure
+  }
+}
+
+mutation UpdateManyModule(
+  $data: ModuleUpdateManyMutationInput!
+  $where: ModuleWhereInput
+) {
+  updateManyModule(data: $data, where: $where) {
+    count
+  }
+}
+
+mutation DeleteModule($where: ModuleWhereUniqueInput!) {
+  deleteModule(where: $where) {
+    id
+    name
+    type
+    fileStructure
+  }
+}
+
+mutation DeleteManyModule($where: ModuleWhereInput) {
+  deleteManyModule(where: $where) {
+    count
   }
 }
