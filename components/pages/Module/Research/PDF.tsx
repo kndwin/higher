@@ -41,8 +41,7 @@ export const PDF = ({ css }: { css?: CSS }) => {
           }}
         </PdfLoader>
       ) : (
-        <Card css={{ height: "100%" }}>
-        </Card>
+        <Card css={{ height: "100%" }}></Card>
       )}
     </Container>
   );

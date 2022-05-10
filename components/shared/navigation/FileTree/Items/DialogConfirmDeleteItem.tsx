@@ -38,8 +38,8 @@ export const DialogConfirmDeleteItem = ({ item, onRemove }) => {
             border: "1px solid $slate6",
             p: "$2",
             br: "$1",
-						width: "fit-content",
-						mb: "$3"
+            width: "fit-content",
+            mb: "$3",
           }}
         >{`${item?.label}`}</Text>
         {item.type === ("folder" as const) && item.children.length > 0 && (
