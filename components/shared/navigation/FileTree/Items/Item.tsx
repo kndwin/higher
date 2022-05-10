@@ -118,7 +118,6 @@ export const Item = forwardRef<HTMLDivElement, Props>(
         };
         newItems = addItem(items, newItem, value);
       }
-
       setItems(newItems);
     };
 

@@ -19,6 +19,8 @@ export const PDF = ({ css }: { css?: CSS }) => {
     }
   }, [fileUrl]);
 
+	console.log({ selectedFile })
+
   return (
     <Container
       css={{
