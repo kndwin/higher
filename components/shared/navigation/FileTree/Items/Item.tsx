@@ -117,6 +117,7 @@ export const Item = forwardRef<HTMLDivElement, Props>(
           fileUrl,
         };
         newItems = addItem(items, newItem, value);
+				console.log({ newItems })
       }
       setItems(newItems);
     };

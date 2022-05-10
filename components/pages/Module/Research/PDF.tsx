@@ -19,8 +19,6 @@ export const PDF = ({ css }: { css?: CSS }) => {
     }
   }, [fileUrl]);
 
-	console.log({ selectedFile })
-
   return (
     <Container
       css={{
@@ -44,10 +42,6 @@ export const PDF = ({ css }: { css?: CSS }) => {
         </PdfLoader>
       ) : (
         <Card css={{ height: "100%" }}>
-          <Text
-            as="h1"
-            css={{ color: "$slate9" }}
-          >{`📄 No file selected`}</Text>
         </Card>
       )}
     </Container>

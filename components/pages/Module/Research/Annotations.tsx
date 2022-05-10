@@ -114,7 +114,6 @@ export const Annotations = ({ css }: Props) => {
         p: "$3",
       }}
     >
-      <Text as="h1">{`Annotations`}</Text>
       {highlights?.map((highlight: IHighlight) => (
         <Card
           onClick={() => handleHighlightScrollToView({ highlight })}

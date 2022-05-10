@@ -30,19 +30,18 @@ export const DialogConfirmDeleteItem = ({ item, onRemove }) => {
       <Dialog.Content>
         <Dialog.Title>{`Delete file`}</Dialog.Title>
         <Dialog.Description>
-          <Text as="span">
-            {`Are you sure you want to delete ${item.type} `}
-          </Text>
-          <Text
-            as="span"
-            css={{
-              background: "$slate3",
-              border: "1px solid $slate6",
-              p: "$2",
-              br: "$1",
-            }}
-          >{`${item?.label}`}</Text>
+          <Text>{`Are you sure you want to delete ${item.type} `}</Text>
         </Dialog.Description>
+        <Text
+          css={{
+            background: "$slate3",
+            border: "1px solid $slate6",
+            p: "$2",
+            br: "$1",
+						width: "fit-content",
+						mb: "$3"
+          }}
+        >{`${item?.label}`}</Text>
         {item.type === ("folder" as const) && item.children.length > 0 && (
           <Flex css={{ flexDirection: "column", alignItems: "flex-start" }}>
             <Text as="h3">{`The following files will also be removed`}</Text>

@@ -29,9 +29,9 @@ export const Sidebar = () => {
     setFiles(selectedModule?.fileStructure);
   }, [JSON.stringify(selectedModule?.fileStructure)]);
 
-	useEffect(() => {
+  useEffect(() => {
     setSelectedFile(null);
-	}, [selectedModule.id])
+  }, [selectedModule.id]);
 
   return (
     <Container.Sidebar

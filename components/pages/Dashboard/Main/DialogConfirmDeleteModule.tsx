@@ -1,23 +1,7 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 
-import {
-  Flex,
-  Input,
-  Text,
-  Grid,
-  Card,
-  Badge,
-  DropdownMenu,
-  Icon,
-  Button,
-  Dialog,
-} from "components/shared";
-
-import type { Module } from "graphql/client/generated";
-import { DotsHorizontal } from "components/icons";
+import { Flex, Input, Text, Button, Dialog } from "components/shared";
 import { useModules, useToast } from "hooks";
-import { styled } from "@stitches/react";
 
 export const DialogConfirmDeleteModule = ({ module }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
