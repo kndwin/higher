@@ -1,5 +1,22 @@
 import { createStitches } from "@stitches/react";
-import { slate, slateDark, red, cyan, grass, amber } from "@radix-ui/colors";
+import {
+  violet,
+  violetDark,
+  orange,
+  orangeDark,
+  purple,
+  purpleDark,
+  slate,
+  slateDark,
+  red,
+  redDark,
+  cyan,
+  cyanDark,
+  grass,
+  grassDark,
+  amber,
+  amberDark,
+} from "@radix-ui/colors";
 import type * as Stitches from "@stitches/react";
 
 export const {
@@ -18,6 +35,9 @@ export const {
       ...cyan,
       ...grass,
       ...amber,
+      ...violet,
+      ...orange,
+      ...purple,
       light: "#fafafa",
       dark: "#121212",
       primaryGradient: "linear-gradient(99.26deg, #0894B3 0%, #84CDDA 107.7%)",
@@ -196,6 +216,19 @@ export const {
     bp1: "(min-width: 520px)",
     bp2: "(min-width: 900px)",
   },
+});
+
+export const darkTheme = createTheme({
+	colors: {
+		...violetDark,
+		...orangeDark,
+		...purpleDark,
+		...slateDark,
+		...redDark,
+		...cyanDark,
+		...grassDark,
+		...amberDark
+	}
 });
 
 export type CSS = Stitches.CSS<typeof config>;

@@ -21,17 +21,14 @@ export const Sidebar = () => {
   const { updatedFiles } = useTrackFilesUpdated();
 
   useEffect(() => {
-    console.log("useEffect");
-    console.log({ files });
-  }, [JSON.stringify(files)]);
-
-  useEffect(() => {
     setFiles(selectedModule?.fileStructure);
-  }, [JSON.stringify(selectedModule?.fileStructure)]);
+  }, [JSON.stringify(selectedModule?.id)]);
 
   useEffect(() => {
-    setSelectedFile(null);
-  }, [selectedModule.id]);
+		if (selectedModule) {
+			setSelectedFile(null);
+		}
+  }, [selectedModule?.id]);
 
   return (
     <Container.Sidebar

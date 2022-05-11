@@ -139,23 +139,29 @@ export const Annotations = ({ css }: Props) => {
               borderWidth: "2px",
               broderStyle: "solid",
               borderColor: "$slate12",
+							mb: "$3",
             }}
           >
-            <Text css={{ whiteSpace: "pre-wrap" }}>
+            <Text css={{ whiteSpace: "pre-wrap", fontFamily: "serif" }}>
               {highlight.content.text}
             </Text>
           </Card>
           <Flex css={{ gap: "$2", py: "$2" }}>
-            {["$hlPeach", "$hlSkyblue", "$hlGrass", "$hlAmber", "$cyan"].map(
-              (color) => (
-                <ColorSwatch
-                  key={color}
-                  onClick={() => handleColorUpdate({ highlight, color })}
-                  css={{ backgroundColor: `${color}4` }}
-                  checked={highlight.comment.color === color}
-                />
-              )
-            )}
+            {[
+              "$hlPeach",
+              "$hlSkyblue",
+              "$hlGrass",
+              "$hlAmber",
+              "$violet",
+              "$orange",
+            ].map((color) => (
+              <ColorSwatch
+                key={color}
+                onClick={() => handleColorUpdate({ highlight, color })}
+                css={{ backgroundColor: `${color}4` }}
+                checked={highlight.comment.color === color}
+              />
+            ))}
           </Flex>
           <RTE
             initialText={highlight?.comment?.text}

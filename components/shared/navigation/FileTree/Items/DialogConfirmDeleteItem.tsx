@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import { Flex, Text, Button, Dialog } from "components/shared";
-import { CrossIcon } from "components/icons";
+import { Flex, Text, Button, Dialog, Icon } from "components/shared";
+import { CrossIcon, FolderIcon, FileIcon } from "components/icons";
 import { useFiles, useFileAttachments } from "hooks";
 
 import { Action } from "./Action";
@@ -28,20 +28,26 @@ export const DialogConfirmDeleteItem = ({ item, onRemove }) => {
         </Action>
       </Dialog.Trigger>
       <Dialog.Content>
-        <Dialog.Title>{`Delete file`}</Dialog.Title>
+        <Dialog.Title>{`Delete ${item.type}`}</Dialog.Title>
         <Dialog.Description>
-          <Text>{`Are you sure you want to delete ${item.type} `}</Text>
+          {`Are you sure you want to delete ${item.type}`}
         </Dialog.Description>
-        <Text
+        <Flex
           css={{
             background: "$slate3",
             border: "1px solid $slate6",
-            p: "$2",
+            px: "$2",
+            py: "$1",
             br: "$1",
             width: "fit-content",
             mb: "$3",
           }}
-        >{`${item?.label}`}</Text>
+        >
+          <Icon css={{ mr: "$2" }}>
+            {item?.type === "file" ? <FileIcon /> : <FolderIcon />}
+          </Icon>
+          <Text>{`${item?.label}`}</Text>
+        </Flex>
         {item.type === ("folder" as const) && item.children.length > 0 && (
           <Flex css={{ flexDirection: "column", alignItems: "flex-start" }}>
             <Text as="h3">{`The following files will also be removed`}</Text>

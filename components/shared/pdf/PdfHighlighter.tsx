@@ -456,18 +456,23 @@ const PopoverTooltip = ({
             }}
           >
             <Flex css={{ gap: "$2", py: "$2" }}>
-              {["$hlPeach", "$hlSkyblue", "$hlGrass", "$hlAmber", "$cyan"].map(
-                (color) => (
-                  <ColorSwatch
-                    key={color}
-                    onClick={() => {
-                      setColorSelected(color);
-                    }}
-                    css={{ backgroundColor: `${color}4` }}
-                    checked={colorSelected === color}
-                  />
-                )
-              )}
+              {[
+                "$hlPeach",
+                "$hlSkyblue",
+                "$hlGrass",
+                "$hlAmber",
+                "$violet",
+                "$orange",
+              ].map((color) => (
+                <ColorSwatch
+                  key={color}
+                  onClick={() => {
+                    setColorSelected(color);
+                  }}
+                  css={{ backgroundColor: `${color}4` }}
+                  checked={colorSelected === color}
+                />
+              ))}
             </Flex>
             <Flex css={{ minHeight: "5em", minWidth: "20em", mb: "$2" }}>
               <RichTextEditor value={rteContent} onChange={setRteContent} />

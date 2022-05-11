@@ -16,6 +16,7 @@ import {
 import type { TreeItems } from "../types";
 import { setProperty, addItem, findItemDeep } from "../utilities";
 import { DialogConfirmDeleteItem } from "./DialogConfirmDeleteItem";
+import { useSession } from "next-auth/react";
 
 export interface Props extends HTMLAttributes<HTMLLIElement> {
   childCount?: number;
@@ -65,6 +66,7 @@ export const Item = forwardRef<HTMLDivElement, Props>(
     ref
   ) => {
     const fileRef = useRef(null);
+    const { data: session } = useSession();
     const { setSelectedFile, selectedFile } = useFiles();
     const { selectedModule } = useModules();
     const { createFileAttachment } = useFileAttachments();
@@ -99,7 +101,10 @@ export const Item = forwardRef<HTMLDivElement, Props>(
         setSelectedFile(newTempItem);
 
         // Upload file to server
-        const fileUrl = await uploadFile({ file });
+        const fileUrl = await uploadFile({
+          file,
+          folder: `users/${session.user.id}/modules/${selectedModule.id}/files/${item.id}`,
+        });
         const newFileAttachment = await createFileAttachment({
           data: {
             highlights: [],
@@ -166,17 +171,6 @@ export const Item = forwardRef<HTMLDivElement, Props>(
                 <ChevronIcon orientation={collapsed ? "down" : "up"} />
               </Action>
             )}
-            {type === "folder" && (
-              <Action onClick={() => fileRef.current.click()}>
-                <PlusIcon />
-                <HiddenInput
-                  onChange={(e) => handleFileUpload(e)}
-                  type="file"
-                  accept=".pdf"
-                  ref={fileRef}
-                />
-              </Action>
-            )}
             {isEditLabel ? (
               <Input
                 ref={labelRef}
@@ -196,6 +190,17 @@ export const Item = forwardRef<HTMLDivElement, Props>(
               </Text>
             )}
           </Flex>
+          {type === "folder" && (
+            <Action onClick={() => fileRef.current.click()}>
+              <PlusIcon />
+              <HiddenInput
+                onChange={(e) => handleFileUpload(e)}
+                type="file"
+                accept=".pdf"
+                ref={fileRef}
+              />
+            </Action>
+          )}
           <Flex
             css={{
               width: "fit-content",

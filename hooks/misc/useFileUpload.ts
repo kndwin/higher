@@ -13,10 +13,12 @@ export const useFileUpload = () => {
   const { state, setState } = useStore();
   const uploadFile = async ({
     file,
+    folder,
     type = "auto",
   }: {
     file: File;
     type?: "image" | "video" | "raw" | "auto";
+    folder?: string;
   }) => {
     const data = new FormData();
     const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
@@ -24,6 +26,9 @@ export const useFileUpload = () => {
     setState("loading");
     data.append("file", file);
     data.append("upload_preset", uploadPreset);
+    if (folder) {
+      data.append("public_id", folder);
+    }
     const res = await fetch(
       `https://api.cloudinary.com/v1_1/${cloudName}/${type}/upload`,
       {

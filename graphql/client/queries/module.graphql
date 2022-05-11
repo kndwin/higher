@@ -1,8 +1,9 @@
-query Modules {
-  modules {
+query Modules($where: ModuleWhereInput) {
+  modules(where: $where) {
     id
     name
     type
+    userId
     fileStructure
   }
 }

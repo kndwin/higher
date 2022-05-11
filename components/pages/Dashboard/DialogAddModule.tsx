@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
-import { useState, useId, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 import { BoxIcon } from "components/icons";
 import { Icon, Button, Text, Input, Dialog, Grid } from "components/shared";
@@ -9,7 +10,6 @@ import { useFiles, useModules, useToast } from "hooks";
 
 import { ModuleCreateInput, ModuleType } from "graphql/client/generated";
 import { useSession } from "next-auth/react";
-import { nanoid } from "nanoid";
 
 const modules = [
   {
@@ -28,6 +28,7 @@ type FormValues = {
 };
 
 export const DialogAddModule = () => {
+  const router = useRouter();
   const { setToast } = useToast();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selected, setSelected] = useState<ModuleType>(ModuleType.Research);
@@ -48,7 +49,7 @@ export const DialogAddModule = () => {
       },
       fileStructure: [newFolder],
     };
-    await createModule({ data: createModuleData });
+    const createdModule = await createModule({ data: createModuleData });
     setDialogOpen(false);
   };
 
