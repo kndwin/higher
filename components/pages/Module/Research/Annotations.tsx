@@ -18,12 +18,7 @@ interface Props {
 }
 
 export const Annotations = ({ css }: Props) => {
-  const {
-    updateFileAttachment,
-    selectedFileAttachment,
-    setSelectedFileAttachment,
-    fileAttachmentsResult,
-  } = useFileAttachments();
+  const { updateFileAttachment, fileAttachmentsResult } = useFileAttachments();
   const { selectedFile, highlights, setHighlights } = useFiles();
 
   useEffect(() => {
@@ -45,14 +40,9 @@ export const Annotations = ({ css }: Props) => {
   }: {
     highlights: IHighlight[];
   }) => {
-    console.log("updating highlights");
     const updatedHighlights = await updateFileAttachment({
       where: { id: selectedFile?.id },
       data: { highlights },
-    });
-    console.log({
-      updatedHighlights:
-        updatedHighlights?.data?.updateFileAttachment?.highlights,
     });
   };
 
@@ -77,6 +67,7 @@ export const Annotations = ({ css }: Props) => {
       const newHighlights = [...highlights];
       newHighlights[index].comment.color = color;
       setHighlights(newHighlights);
+      handleUpdateHighlights({ highlights: newHighlights });
     }
   };
 
@@ -99,12 +90,6 @@ export const Annotations = ({ css }: Props) => {
     const newHighlights = highlights.filter((h: any) => h.id !== highlight.id);
     setHighlights(newHighlights);
   };
-
-  useEffect(() => {
-    if (Boolean(highlights) && Boolean(selectedFile?.id)) {
-      handleUpdateHighlights({ highlights });
-    }
-  }, [JSON.stringify(highlights)]);
 
   return (
     <Flex

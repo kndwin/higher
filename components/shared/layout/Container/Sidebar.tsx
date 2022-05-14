@@ -46,7 +46,7 @@ export const Sidebar = ({
   );
 
   useEffect(() => {
-		window.addEventListener("mousemove", resize as any);
+    window.addEventListener("mousemove", resize as any);
     window.addEventListener("mouseup", stopResizing as any);
     return () => {
       window.removeEventListener("mousemove", resize as any);
@@ -103,7 +103,7 @@ const Content = styled("div", {
   display: "flex",
   flexDirection: "column",
   p: "$3",
-	width: "100%"
+  width: "100%",
 });
 
 const Resizer = styled("div", {
