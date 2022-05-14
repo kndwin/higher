@@ -45,9 +45,14 @@ export const Annotations = ({ css }: Props) => {
   }: {
     highlights: IHighlight[];
   }) => {
+    console.log("updating highlights");
     const updatedHighlights = await updateFileAttachment({
       where: { id: selectedFile?.id },
       data: { highlights },
+    });
+    console.log({
+      updatedHighlights:
+        updatedHighlights?.data?.updateFileAttachment?.highlights,
     });
   };
 
@@ -139,7 +144,7 @@ export const Annotations = ({ css }: Props) => {
               borderWidth: "2px",
               broderStyle: "solid",
               borderColor: "$slate12",
-							mb: "$3",
+              mb: "$3",
             }}
           >
             <Text css={{ whiteSpace: "pre-wrap", fontFamily: "serif" }}>

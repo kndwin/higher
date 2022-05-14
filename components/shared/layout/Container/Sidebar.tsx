@@ -46,7 +46,7 @@ export const Sidebar = ({
   );
 
   useEffect(() => {
-    window.addEventListener("mousemove", resize as any);
+		window.addEventListener("mousemove", resize as any);
     window.addEventListener("mouseup", stopResizing as any);
     return () => {
       window.removeEventListener("mousemove", resize as any);
@@ -65,7 +65,7 @@ export const Sidebar = ({
         transition: `${!isResizing && "all"} 0.2s ease-in-out`,
         width: sidebarWidth,
         maxWidth: sidebarWidth,
-        minWidth: isSidebarOpen ? "fit-content" : 0,
+        minWidth: isSidebarOpen ? SIDEBAR_WIDTH.MIN : 0,
         opacity: isSidebarOpen ? "1" : "0",
         borderWidth: isSidebarOpen ? "3px" : "0",
         ...css,
@@ -103,6 +103,7 @@ const Content = styled("div", {
   display: "flex",
   flexDirection: "column",
   p: "$3",
+	width: "100%"
 });
 
 const Resizer = styled("div", {

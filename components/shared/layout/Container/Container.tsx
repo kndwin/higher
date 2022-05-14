@@ -17,16 +17,11 @@ interface ContextProps {
 export const ContainerContext: Context<ContextProps> = createContext(null);
 
 export enum SIDEBAR_WIDTH {
-  MIN = 0,
+  MIN = 260,
   MAX = 1200,
 }
 
 export const Container = ({ children, ...props }) => {
-  const {
-    open: openToast,
-    setOpen: setOpenToast,
-    data: dataToast,
-  } = useToast();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [sidebarWidth, setSidebarWidth] = useState<number | string>(
     SIDEBAR_WIDTH.MIN
@@ -42,6 +37,20 @@ export const Container = ({ children, ...props }) => {
       }}
     >
       <StyledContainer {...props}>{children}</StyledContainer>
+      <ToastInContainer />
+    </ContainerContext.Provider>
+  );
+};
+
+const ToastInContainer = () => {
+  const {
+    open: openToast,
+    setOpen: setOpenToast,
+    data: dataToast,
+  } = useToast();
+
+  return (
+    <>
       <Toast
         duration={dataToast.durationInMs}
         open={openToast}
@@ -74,7 +83,7 @@ export const Container = ({ children, ...props }) => {
         )}
       </Toast>
       <Toast.Viewport />
-    </ContainerContext.Provider>
+    </>
   );
 };
 

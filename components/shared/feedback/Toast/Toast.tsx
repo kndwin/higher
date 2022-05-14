@@ -81,11 +81,11 @@ const StyledToast = styled(ToastPrimitive.Root, {
     color: {
       success: {
         color: "$grass11",
-        background: "$grass5",
+        background: "$grass2",
       },
       error: {
         color: "$red11",
-        background: "$red5",
+        background: "$red2",
       },
     },
   },

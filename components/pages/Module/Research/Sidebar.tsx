@@ -25,9 +25,9 @@ export const Sidebar = () => {
   }, [JSON.stringify(selectedModule?.id)]);
 
   useEffect(() => {
-		if (selectedModule) {
-			setSelectedFile(null);
-		}
+    if (selectedModule) {
+      setSelectedFile(null);
+    }
   }, [selectedModule?.id]);
 
   return (

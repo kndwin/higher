@@ -219,16 +219,16 @@ export const {
 });
 
 export const darkTheme = createTheme({
-	colors: {
-		...violetDark,
-		...orangeDark,
-		...purpleDark,
-		...slateDark,
-		...redDark,
-		...cyanDark,
-		...grassDark,
-		...amberDark
-	}
+  colors: {
+    ...violetDark,
+    ...orangeDark,
+    ...purpleDark,
+    ...slateDark,
+    ...redDark,
+    ...cyanDark,
+    ...grassDark,
+    ...amberDark,
+  },
 });
 
 export type CSS = Stitches.CSS<typeof config>;

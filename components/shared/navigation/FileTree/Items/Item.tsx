@@ -122,7 +122,6 @@ export const Item = forwardRef<HTMLDivElement, Props>(
           fileUrl,
         };
         newItems = addItem(items, newItem, value);
-        console.log({ newItems });
       }
       setItems(newItems);
     };
@@ -155,6 +154,7 @@ export const Item = forwardRef<HTMLDivElement, Props>(
         >
           <Flex
             css={{
+              display: "contents",
               gap: "$1",
               width: "100%",
               justifyContent: "flex-start",
@@ -179,12 +179,22 @@ export const Item = forwardRef<HTMLDivElement, Props>(
                 size={8}
                 onBlur={() => handleItemUpdate({ label })}
                 onChange={(e) => setLabel(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key == "Enter") {
+                    handleItemUpdate({ label });
+                  }
+                }}
               />
             ) : (
               <Text
                 onClick={() => setIsEditLabel(true)}
-                as="span"
-                css={{ mr: "$2", whiteSpace: "nowrap", width: "fit-content" }}
+                css={{
+                  mr: "$2",
+                  width: "100%",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                }}
               >
                 {label}
               </Text>
