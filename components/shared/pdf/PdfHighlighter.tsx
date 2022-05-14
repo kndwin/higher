@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect, createElement } from "react";
+import { useState, useRef, useEffect } from "react";
+import type { FC, MouseEvent } from "react";
 import { createRoot } from "react-dom/client";
 import { styled } from "stitches.config";
-import type { FC, PointerEventHandler } from "react";
 import debounce from "lodash.debounce";
 import type { PDFDocumentProxy } from "pdfjs-dist";
 
@@ -10,39 +10,26 @@ import {
   getClientRects,
   getBoundingRect,
   getPagesFromRange,
-  getPageFromElement,
-  findOrCreateContainerLayer,
-  getWindow,
   scaledToViewport,
   viewportToScaled,
   asElement,
-  isHTMLElement,
 } from "./utilities";
 
-import type {
-  Position,
-  ScaledPosition,
-  IHighlight,
-  Scaled,
-  LTWH,
-  LTWHP,
-  NewHighlight,
-} from "./types";
+import type { Position, ScaledPosition, IHighlight } from "./types";
 import { nanoid } from "nanoid";
 
 import {
   Popover,
   Text,
-  Textarea,
   Button,
-  Input,
   Card,
   Flex,
   RichTextEditor,
   ColorSwatch,
-  Skeleton,
   Tooltip,
 } from "components/shared";
+
+import { useFiles, useFileAttachments } from "hooks";
 
 type T_ViewportHighlight<T_HT> = { position: Position } & T_HT;
 
@@ -194,6 +181,7 @@ export const PdfHighlighter: FC<Props<IHighlight>> = ({
 
   useEffect(() => {
     if (Boolean(highlights) && Boolean(pdfViewer)) {
+      console.log({ pdfViewer, highlights });
       clearHighlightsRendered();
       renderHighlights();
     }
@@ -222,7 +210,6 @@ export const PdfHighlighter: FC<Props<IHighlight>> = ({
     usePdfCoordinates,
   }: ScaledPosition): Position => {
     const viewport = pdfViewer?.getPageView(pageNumber - 1)?.viewport;
-
     return {
       boundingRect: scaledToViewport(boundingRect, viewport, usePdfCoordinates),
       rects: (rects || []).map((rect) =>
@@ -230,15 +217,6 @@ export const PdfHighlighter: FC<Props<IHighlight>> = ({
       ),
       pageNumber,
     };
-  };
-
-  const onMouseDown: PointerEventHandler = (event) => {
-    if (!isHTMLElement(event.target)) {
-      return;
-    }
-    if (asElement(event.target).closest(".PdfHighlighter__tip-container")) {
-      return;
-    }
   };
 
   const handleScaleValue = () => {
@@ -329,26 +307,61 @@ export const PdfHighlighter: FC<Props<IHighlight>> = ({
     });
   };
 
+  const handleMouseOnSelection = ({ page, boundingRect }: any) => {
+    if (!Boolean(page) || !Boolean(boundingRect)) {
+      console.log("returning early");
+      return;
+    }
+    const pageBoundingRect = {
+      ...boundingRect,
+      top: boundingRect.top - page.node.offsetTop,
+      left: boundingRect.left - page.node.offsetLeft,
+      pageNumber: page.number,
+    };
+    const viewportPosition = {
+      boundingRect: pageBoundingRect,
+      rects: [],
+      pageNumber: page.number,
+    };
+
+    const scaledPosition = viewportPositionToScaled(viewportPosition);
+
+    // Get screenshot from canvas API
+    const canvas = pdfViewer.getPageView(page.number - 1).canvas;
+    const image = getAreaAsPNG(canvas, pageBoundingRect);
+
+    const newHighlight: IHighlight = {
+      position: scaledPosition,
+      content: { image },
+      comment: {
+        text: "",
+        emoji: "",
+        color: "",
+      },
+      id: nanoid(),
+    };
+    setGhostHighlight(newHighlight);
+    setTipPosition(viewportPosition);
+  };
+
   return (
-    <div onPointerDown={onMouseDown}>
-      <StyledContainer
-        ref={containerRef}
-        onContextMenu={(e) => e.preventDefault()}
-      >
-        <StyledPdfViewer className="pdfViewer" />
-        {Boolean(pdfViewer) && (
-          <PopoverTooltip
-            pageDiv={pdfViewer?.getPageView(tipPosition?.pageNumber - 1)?.div}
-            pdfViewer={pdfViewer}
-            open={dropmenuAddConfirmOpen}
-            setOpen={setDropmenuAddConfirmOpen}
-            highlight={ghostHighlight}
-            position={tipPosition}
-            setHighlights={setHighlights}
-          />
-        )}
-      </StyledContainer>
-    </div>
+    <StyledContainer
+      ref={containerRef}
+      onContextMenu={(e) => e.preventDefault()}
+    >
+      <StyledPdfViewer className="pdfViewer" />
+      {Boolean(pdfViewer) && (
+        <PopoverTooltip
+          pageDiv={pdfViewer?.getPageView(tipPosition?.pageNumber - 1)?.div}
+          open={dropmenuAddConfirmOpen}
+          setOpen={setDropmenuAddConfirmOpen}
+          highlight={ghostHighlight}
+          position={tipPosition}
+          setHighlights={setHighlights}
+        />
+      )}
+      <MouseSelection onSelection={handleMouseOnSelection} />
+    </StyledContainer>
   );
 };
 
@@ -368,6 +381,8 @@ const StyledPdfViewer = styled("div", {
   mx: "auto",
 });
 
+// PopoverTooltip
+
 const PopoverTooltip = ({
   highlight,
   open,
@@ -376,24 +391,41 @@ const PopoverTooltip = ({
   setHighlights,
   pageDiv,
 }: any) => {
+  const { updateFileAttachment } = useFileAttachments();
   const [colorSelected, setColorSelected] = useState("");
+  const { selectedFile } = useFiles();
 
   const [mode, setMode] = useState<"add-highlight" | "comment">(
     "add-highlight"
   );
 
+  const handleUpdateHighlights = async ({
+    highlights,
+  }: {
+    highlights: IHighlight[];
+  }) => {
+    const updatedHighlights = await updateFileAttachment({
+      where: { id: selectedFile?.id },
+      data: { highlights },
+    });
+  };
+
   const handleAddComment = () => {
-    setHighlights((prev: any[]) => [
-      ...prev,
-      {
-        ...highlight,
-        comment: {
-          text: rteContent,
-          emoji: "",
-          color: colorSelected,
+    setHighlights((prev: any[]) => {
+      const newHighlights = [
+        ...prev,
+        {
+          ...highlight,
+          comment: {
+            text: rteContent,
+            emoji: "",
+            color: colorSelected,
+          },
         },
-      },
-    ]);
+      ];
+      handleUpdateHighlights({ highlights: newHighlights });
+      return newHighlights;
+    });
     setOpen(false);
   };
 
@@ -500,4 +532,106 @@ const HiddenTrigger = styled("div", {
   height: 0,
   width: 0,
   visibility: "hidden",
+});
+
+// MouseSelection
+
+interface Coords {
+  x: number;
+  y: number;
+}
+
+const MouseSelection = ({ onSelection }: any) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const [start, setStart] = useState<Coords | null>(null);
+  const [end, setEnd] = useState<Coords | null>(null);
+  const [locked, setLocked] = useState(true);
+
+  const getBoundingRect = ({ start, end }: { start: Coords; end: Coords }) => {
+    if (!Boolean(end) || !Boolean(start)) {
+      return;
+    }
+    return {
+      left: Math.min(end.x, start.x),
+      top: Math.min(end.y, start.y),
+      width: Math.abs(end.x - start.x),
+      height: Math.abs(end.y - start.y),
+    };
+  };
+
+  const getCoordFromClick = (e: MouseEvent) => {
+    const pdfEl = containerRef.current.parentElement;
+    const rect = pdfEl.getBoundingClientRect();
+    const x = e.pageX - rect.left + pdfEl.scrollLeft;
+    const y = e.pageY - rect.top + pdfEl.scrollTop - window.scrollY;
+    return { x, y };
+  };
+
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    if (Boolean(start) && locked) {
+      const { x, y } = getCoordFromClick(e);
+      setEnd({ x, y });
+    }
+  };
+
+  const handleMouseDown = (e: MouseEvent) => {
+    if (!e.altKey) {
+      return;
+    }
+    e.preventDefault();
+    const { x, y } = getCoordFromClick(e);
+    setStart({ x, y });
+    setLocked(true);
+  };
+
+  const handleMouseUp = (e: MouseEvent) => {
+    if (locked) {
+      setLocked(false);
+      const { x, y } = getCoordFromClick(e);
+      const endToSet = { x, y };
+      setEnd(endToSet);
+      const node = asElement(e.target).closest(".page");
+      const number = Number(asElement(node).dataset.pageNumber);
+      onSelection({
+        page: { node, number },
+        boundingRect: getBoundingRect({ start, end: endToSet }),
+      });
+    } else {
+      setStart(null);
+      setEnd(null);
+    }
+  };
+
+  useEffect(() => {
+    const pdfEl = containerRef.current.parentElement;
+    pdfEl.addEventListener("mousedown", handleMouseDown as any);
+    pdfEl.addEventListener("mousemove", handleMouseMove as any);
+    pdfEl.addEventListener("mouseup", handleMouseUp as any);
+    return () => {
+      pdfEl.removeEventListener("mousedown", handleMouseDown as any);
+      pdfEl.removeEventListener("mousemove", handleMouseMove as any);
+      pdfEl.removeEventListener("mouseup", handleMouseUp as any);
+    };
+  }, [containerRef.current, locked]);
+
+  return (
+    <Flex ref={containerRef} css={{ position: "block" }}>
+      {Boolean(start) && Boolean(end) && (
+        <StyledMouseBorder
+          css={{
+            ...getBoundingRect({ start, end }),
+          }}
+        />
+      )}
+    </Flex>
+  );
+};
+
+const StyledMouseBorder = styled("div", {
+  position: "absolute",
+  border: "1px solid $slate10",
+  background: "$slate6",
+  br: "$2",
+  opacity: 0.5,
 });

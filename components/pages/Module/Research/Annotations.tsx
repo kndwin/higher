@@ -1,4 +1,4 @@
-import type { CSS } from "@stitches/react";
+import { CSS, styled } from "@stitches/react";
 import { useState, useEffect } from "react";
 import {
   Flex,
@@ -89,6 +89,7 @@ export const Annotations = ({ css }: Props) => {
   }) => {
     const newHighlights = highlights.filter((h: any) => h.id !== highlight.id);
     setHighlights(newHighlights);
+    handleUpdateHighlights({ highlights: newHighlights });
   };
 
   return (
@@ -132,9 +133,17 @@ export const Annotations = ({ css }: Props) => {
               mb: "$3",
             }}
           >
-            <Text css={{ whiteSpace: "pre-wrap", fontFamily: "serif" }}>
-              {highlight.content.text}
-            </Text>
+            {highlight.content.text && (
+              <Text css={{ whiteSpace: "pre-wrap", fontFamily: "serif" }}>
+                {highlight.content.text}
+              </Text>
+            )}
+            {highlight.content.image && (
+              <Screenshot src={highlight.content.image} alt="Notes image" />
+            )}
+            <Text
+              css={{ fontSize: "$1", textAlign: "right" }}
+            >{`Page ${highlight.position.pageNumber}`}</Text>
           </Card>
           <Flex css={{ gap: "$2", py: "$2" }}>
             {[
@@ -185,3 +194,8 @@ const RTE = ({ initialText, updateComment, css }: any) => {
     />
   );
 };
+
+const Screenshot = styled("img", {
+  width: "100%",
+  height: "100%",
+});
