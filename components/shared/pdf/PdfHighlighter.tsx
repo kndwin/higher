@@ -29,7 +29,7 @@ import {
   Tooltip,
 } from "components/shared";
 
-import { useFiles, useFileAttachments } from "hooks";
+import { useFiles, useFileAttachments, useMouseDown } from "hooks";
 
 type T_ViewportHighlight<T_HT> = { position: Position } & T_HT;
 
@@ -55,6 +55,22 @@ export const PdfHighlighter: FC<Props<IHighlight>> = ({
   const [eventBus, setEventBus] = useState<any>();
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const isMouseDownRef = useRef(false);
+	const highlightTmpRef = useRef({})
+
+  const onMouseDown = () => {
+    isMouseDownRef.current = true;
+  };
+  const onMouseUp = () => {
+    isMouseDownRef.current = false;
+    if (!!highlightTmpRef.current?.newHighlight) {
+      setGhostHighlight(highlightTmpRef.current.newHighlight);
+      setTipPosition(highlightTmpRef.current.viewportPosition);
+      renderHighlights();
+			highlightTmpRef.current = {}
+    }
+  };
+
   const [resizeObserver, setResizeObserver] = useState<ResizeObserver | null>(
     null
   );
@@ -104,17 +120,21 @@ export const PdfHighlighter: FC<Props<IHighlight>> = ({
     const { ownerDocument: doc } = containerRef.current;
     if (Boolean(doc) && Boolean(eventBus)) {
       eventBus.on("pagesinit", onDocumentReady);
+      doc.addEventListener("mousedown", onMouseDown);
+      doc.addEventListener("mouseup", onMouseUp);
       doc.addEventListener("selectionchange", debouncedSelectionChange);
       doc.defaultView?.addEventListener("resize", debouncedScaleValue);
     }
     return () => {
       if (Boolean(doc) && Boolean(eventBus)) {
         eventBus.off("pagesinit", onDocumentReady);
+        doc.removeEventListener("mousedown", onMouseDown);
+        doc.removeEventListener("mouseup", onMouseUp);
         doc.removeEventListener("selectionchange", debouncedSelectionChange);
         doc.defaultView?.removeEventListener("resize", debouncedScaleValue);
       }
     };
-  }, [containerRef.current, eventBus]);
+  }, [eventBus]);
 
   useEffect(() => {
     Boolean(resizeObserver) && resizeObserver.observe(containerRef.current);
@@ -168,9 +188,12 @@ export const PdfHighlighter: FC<Props<IHighlight>> = ({
       },
       id: nanoid(),
     };
-    setGhostHighlight(newHighlight);
-    setTipPosition(viewportPosition);
-    renderHighlights();
+
+
+		highlightTmpRef.current = {
+      newHighlight,
+      viewportPosition,
+		}
   };
 
   useEffect(() => {
@@ -181,7 +204,6 @@ export const PdfHighlighter: FC<Props<IHighlight>> = ({
 
   useEffect(() => {
     if (Boolean(highlights) && Boolean(pdfViewer)) {
-      console.log({ pdfViewer, highlights });
       clearHighlightsRendered();
       renderHighlights();
     }
@@ -309,7 +331,6 @@ export const PdfHighlighter: FC<Props<IHighlight>> = ({
 
   const handleMouseOnSelection = ({ page, boundingRect }: any) => {
     if (!Boolean(page) || !Boolean(boundingRect)) {
-      console.log("returning early");
       return;
     }
     const pageBoundingRect = {
@@ -340,8 +361,9 @@ export const PdfHighlighter: FC<Props<IHighlight>> = ({
       },
       id: nanoid(),
     };
-    setGhostHighlight(newHighlight);
-    setTipPosition(viewportPosition);
+
+		setGhostHighlight(newHighlight);
+		setTipPosition(viewportPosition);
   };
 
   return (

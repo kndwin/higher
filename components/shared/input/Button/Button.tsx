@@ -103,7 +103,7 @@ export const Button = styled("button", {
         pointerEvents: "none",
         "&::before": {
           content: "''",
-          size: "$3",
+          size: "$2",
           mr: "$3",
           backgroundColor: "$slate3",
           borderRadius: "$round",
