@@ -30,6 +30,7 @@ import {
 } from "components/shared";
 
 import { useFiles, useFileAttachments, useMouseDown } from "hooks";
+import { Highlight } from "react-pdf-highlighter";
 
 type T_ViewportHighlight<T_HT> = { position: Position } & T_HT;
 
@@ -41,6 +42,11 @@ interface Props<T_HT> {
   scrollRef?: (scrollTo: (highlight: IHighlight) => void) => void;
   pdfScaleValue?: string;
 }
+
+type HighlightTmpRef = {
+  newHighlight: IHighlight;
+  viewportPosition: Position;
+};
 
 export const PdfHighlighter: FC<Props<IHighlight>> = ({
   highlights,
@@ -56,18 +62,19 @@ export const PdfHighlighter: FC<Props<IHighlight>> = ({
 
   const containerRef = useRef<HTMLDivElement>(null);
   const isMouseDownRef = useRef(false);
-	const highlightTmpRef = useRef({})
+  const highlightTmpRef = useRef<HighlightTmpRef>({} as HighlightTmpRef);
 
   const onMouseDown = () => {
     isMouseDownRef.current = true;
   };
+
   const onMouseUp = () => {
     isMouseDownRef.current = false;
-    if (!!highlightTmpRef.current?.newHighlight) {
+    if (Boolean(highlightTmpRef?.current.newHighlight)) {
       setGhostHighlight(highlightTmpRef.current.newHighlight);
       setTipPosition(highlightTmpRef.current.viewportPosition);
       renderHighlights();
-			highlightTmpRef.current = {}
+      highlightTmpRef.current = {} as HighlightTmpRef;
     }
   };
 
@@ -189,11 +196,10 @@ export const PdfHighlighter: FC<Props<IHighlight>> = ({
       id: nanoid(),
     };
 
-
-		highlightTmpRef.current = {
+    highlightTmpRef.current = {
       newHighlight,
       viewportPosition,
-		}
+    };
   };
 
   useEffect(() => {
@@ -362,8 +368,8 @@ export const PdfHighlighter: FC<Props<IHighlight>> = ({
       id: nanoid(),
     };
 
-		setGhostHighlight(newHighlight);
-		setTipPosition(viewportPosition);
+    setGhostHighlight(newHighlight);
+    setTipPosition(viewportPosition);
   };
 
   return (
