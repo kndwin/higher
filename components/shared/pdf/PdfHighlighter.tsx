@@ -436,6 +436,7 @@ const PopoverTooltip = ({
       where: { id: selectedFile?.id },
       data: { highlights },
     });
+    console.log({ updatedHighlights });
   };
 
   const handleAddComment = () => {
@@ -451,6 +452,7 @@ const PopoverTooltip = ({
           },
         },
       ];
+      console.log({ newHighlights });
       handleUpdateHighlights({ highlights: newHighlights });
       return newHighlights;
     });

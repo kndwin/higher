@@ -11,6 +11,7 @@ yarn run husky:check-format ||
     echo '❌ Prettier Check Failed.';
     echo 'Running "yarn run husky:fix-format" to fix the issues.';
 		yarn run husky:fix-format;
+		false;  # Fail it here so the fix can get committed
 )
 
 # Check ESLint Standards

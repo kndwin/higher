@@ -8,7 +8,7 @@ query FileAttachments($where: FileAttachmentWhereInput) {
 }
 
 mutation CreateFileAttachment($data: FileAttachmentCreateInput!) {
-  createFileAttachment(data: $data) {
+  createOneFileAttachment(data: $data) {
     highlights
     moduleId
     fileUrl
@@ -26,7 +26,7 @@ mutation CreateManyFileAttachment(
 }
 
 mutation DeleteFileAttachment($where: FileAttachmentWhereUniqueInput!) {
-  deleteFileAttachment(where: $where) {
+  deleteOneFileAttachment(where: $where) {
     id
     fileUrl
     moduleId
@@ -38,7 +38,7 @@ mutation UpdateFileAttachment(
   $data: FileAttachmentUpdateInput!
   $where: FileAttachmentWhereUniqueInput!
 ) {
-  updateFileAttachment(data: $data, where: $where) {
+  updateOneFileAttachment(data: $data, where: $where) {
     id
     fileUrl
     moduleId
@@ -66,7 +66,7 @@ mutation UpsertFileAttachment(
   $create: FileAttachmentCreateInput!
   $update: FileAttachmentUpdateInput!
 ) {
-  upsertFileAttachment(where: $where, create: $create, update: $update) {
+  upsertOneFileAttachment(where: $where, create: $create, update: $update) {
     id
     moduleId
     fileUrl

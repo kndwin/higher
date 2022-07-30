@@ -120,7 +120,7 @@ export type AccountUpdateManyWithWhereWithoutUserInput = {
   where: AccountScalarWhereInput;
 };
 
-export type AccountUpdateManyWithoutUserInput = {
+export type AccountUpdateManyWithoutUserNestedInput = {
   connect?: InputMaybe<Array<AccountWhereUniqueInput>>;
   connectOrCreate?: InputMaybe<Array<AccountCreateOrConnectWithoutUserInput>>;
   create?: InputMaybe<Array<AccountCreateWithoutUserInput>>;
@@ -414,7 +414,7 @@ export type FileAttachmentUpdateInput = {
   fileUrl?: InputMaybe<StringFieldUpdateOperationsInput>;
   highlights?: InputMaybe<Scalars["JSON"]>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  module?: InputMaybe<ModuleUpdateOneRequiredWithoutFileAttachmentsInput>;
+  module?: InputMaybe<ModuleUpdateOneRequiredWithoutFileAttachmentsNestedInput>;
 };
 
 export type FileAttachmentUpdateManyMutationInput = {
@@ -428,7 +428,7 @@ export type FileAttachmentUpdateManyWithWhereWithoutModuleInput = {
   where: FileAttachmentScalarWhereInput;
 };
 
-export type FileAttachmentUpdateManyWithoutModuleInput = {
+export type FileAttachmentUpdateManyWithoutModuleNestedInput = {
   connect?: InputMaybe<Array<FileAttachmentWhereUniqueInput>>;
   connectOrCreate?: InputMaybe<
     Array<FileAttachmentCreateOrConnectWithoutModuleInput>
@@ -494,16 +494,38 @@ export type IntNullableFilter = {
 };
 
 export type JsonNullableFilter = {
+  array_contains?: InputMaybe<Scalars["JSON"]>;
+  array_ends_with?: InputMaybe<Scalars["JSON"]>;
+  array_starts_with?: InputMaybe<Scalars["JSON"]>;
   equals?: InputMaybe<Scalars["JSON"]>;
+  gt?: InputMaybe<Scalars["JSON"]>;
+  gte?: InputMaybe<Scalars["JSON"]>;
+  lt?: InputMaybe<Scalars["JSON"]>;
+  lte?: InputMaybe<Scalars["JSON"]>;
   not?: InputMaybe<Scalars["JSON"]>;
+  path?: InputMaybe<Scalars["String"]>;
+  string_contains?: InputMaybe<Scalars["String"]>;
+  string_ends_with?: InputMaybe<Scalars["String"]>;
+  string_starts_with?: InputMaybe<Scalars["String"]>;
 };
 
 export type JsonNullableWithAggregatesFilter = {
   _count?: InputMaybe<NestedIntNullableFilter>;
   _max?: InputMaybe<NestedJsonNullableFilter>;
   _min?: InputMaybe<NestedJsonNullableFilter>;
+  array_contains?: InputMaybe<Scalars["JSON"]>;
+  array_ends_with?: InputMaybe<Scalars["JSON"]>;
+  array_starts_with?: InputMaybe<Scalars["JSON"]>;
   equals?: InputMaybe<Scalars["JSON"]>;
+  gt?: InputMaybe<Scalars["JSON"]>;
+  gte?: InputMaybe<Scalars["JSON"]>;
+  lt?: InputMaybe<Scalars["JSON"]>;
+  lte?: InputMaybe<Scalars["JSON"]>;
   not?: InputMaybe<Scalars["JSON"]>;
+  path?: InputMaybe<Scalars["String"]>;
+  string_contains?: InputMaybe<Scalars["String"]>;
+  string_ends_with?: InputMaybe<Scalars["String"]>;
+  string_starts_with?: InputMaybe<Scalars["String"]>;
 };
 
 export type Module = {
@@ -678,12 +700,12 @@ export enum ModuleType {
 }
 
 export type ModuleUpdateInput = {
-  fileAttachments?: InputMaybe<FileAttachmentUpdateManyWithoutModuleInput>;
+  fileAttachments?: InputMaybe<FileAttachmentUpdateManyWithoutModuleNestedInput>;
   fileStructure?: InputMaybe<Scalars["JSON"]>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
   type?: InputMaybe<EnumModuleTypeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutModulesInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutModulesNestedInput>;
 };
 
 export type ModuleUpdateManyMutationInput = {
@@ -693,7 +715,7 @@ export type ModuleUpdateManyMutationInput = {
   type?: InputMaybe<EnumModuleTypeFieldUpdateOperationsInput>;
 };
 
-export type ModuleUpdateOneRequiredWithoutFileAttachmentsInput = {
+export type ModuleUpdateOneRequiredWithoutFileAttachmentsNestedInput = {
   connect?: InputMaybe<ModuleWhereUniqueInput>;
   connectOrCreate?: InputMaybe<ModuleCreateOrConnectWithoutFileAttachmentsInput>;
   create?: InputMaybe<ModuleCreateWithoutFileAttachmentsInput>;
@@ -706,7 +728,7 @@ export type ModuleUpdateWithoutFileAttachmentsInput = {
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
   type?: InputMaybe<EnumModuleTypeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutModulesInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutModulesNestedInput>;
 };
 
 export type ModuleUpsertWithoutFileAttachmentsInput = {
@@ -733,24 +755,20 @@ export type ModuleWhereUniqueInput = {
 
 export type Mutation = {
   __typename?: "Mutation";
-  createFileAttachment: FileAttachment;
   createManyFileAttachment: AffectedRowsOutput;
   createManyModule: AffectedRowsOutput;
-  createModule: Module;
-  deleteFileAttachment?: Maybe<FileAttachment>;
+  createOneFileAttachment: FileAttachment;
+  createOneModule: Module;
   deleteManyFileAttachment: AffectedRowsOutput;
   deleteManyModule: AffectedRowsOutput;
-  deleteModule?: Maybe<Module>;
-  updateFileAttachment?: Maybe<FileAttachment>;
+  deleteOneFileAttachment?: Maybe<FileAttachment>;
+  deleteOneModule?: Maybe<Module>;
   updateManyFileAttachment: AffectedRowsOutput;
   updateManyModule: AffectedRowsOutput;
-  updateModule?: Maybe<Module>;
-  upsertFileAttachment: FileAttachment;
-  upsertModule: Module;
-};
-
-export type MutationCreateFileAttachmentArgs = {
-  data: FileAttachmentCreateInput;
+  updateOneFileAttachment?: Maybe<FileAttachment>;
+  updateOneModule?: Maybe<Module>;
+  upsertOneFileAttachment: FileAttachment;
+  upsertOneModule: Module;
 };
 
 export type MutationCreateManyFileAttachmentArgs = {
@@ -763,12 +781,12 @@ export type MutationCreateManyModuleArgs = {
   skipDuplicates?: InputMaybe<Scalars["Boolean"]>;
 };
 
-export type MutationCreateModuleArgs = {
-  data: ModuleCreateInput;
+export type MutationCreateOneFileAttachmentArgs = {
+  data: FileAttachmentCreateInput;
 };
 
-export type MutationDeleteFileAttachmentArgs = {
-  where: FileAttachmentWhereUniqueInput;
+export type MutationCreateOneModuleArgs = {
+  data: ModuleCreateInput;
 };
 
 export type MutationDeleteManyFileAttachmentArgs = {
@@ -779,13 +797,12 @@ export type MutationDeleteManyModuleArgs = {
   where?: InputMaybe<ModuleWhereInput>;
 };
 
-export type MutationDeleteModuleArgs = {
-  where: ModuleWhereUniqueInput;
+export type MutationDeleteOneFileAttachmentArgs = {
+  where: FileAttachmentWhereUniqueInput;
 };
 
-export type MutationUpdateFileAttachmentArgs = {
-  data: FileAttachmentUpdateInput;
-  where: FileAttachmentWhereUniqueInput;
+export type MutationDeleteOneModuleArgs = {
+  where: ModuleWhereUniqueInput;
 };
 
 export type MutationUpdateManyFileAttachmentArgs = {
@@ -798,18 +815,23 @@ export type MutationUpdateManyModuleArgs = {
   where?: InputMaybe<ModuleWhereInput>;
 };
 
-export type MutationUpdateModuleArgs = {
+export type MutationUpdateOneFileAttachmentArgs = {
+  data: FileAttachmentUpdateInput;
+  where: FileAttachmentWhereUniqueInput;
+};
+
+export type MutationUpdateOneModuleArgs = {
   data: ModuleUpdateInput;
   where: ModuleWhereUniqueInput;
 };
 
-export type MutationUpsertFileAttachmentArgs = {
+export type MutationUpsertOneFileAttachmentArgs = {
   create: FileAttachmentCreateInput;
   update: FileAttachmentUpdateInput;
   where: FileAttachmentWhereUniqueInput;
 };
 
-export type MutationUpsertModuleArgs = {
+export type MutationUpsertOneModuleArgs = {
   create: ModuleCreateInput;
   update: ModuleUpdateInput;
   where: ModuleWhereUniqueInput;
@@ -877,8 +899,19 @@ export type NestedIntNullableFilter = {
 };
 
 export type NestedJsonNullableFilter = {
+  array_contains?: InputMaybe<Scalars["JSON"]>;
+  array_ends_with?: InputMaybe<Scalars["JSON"]>;
+  array_starts_with?: InputMaybe<Scalars["JSON"]>;
   equals?: InputMaybe<Scalars["JSON"]>;
+  gt?: InputMaybe<Scalars["JSON"]>;
+  gte?: InputMaybe<Scalars["JSON"]>;
+  lt?: InputMaybe<Scalars["JSON"]>;
+  lte?: InputMaybe<Scalars["JSON"]>;
   not?: InputMaybe<Scalars["JSON"]>;
+  path?: InputMaybe<Scalars["String"]>;
+  string_contains?: InputMaybe<Scalars["String"]>;
+  string_ends_with?: InputMaybe<Scalars["String"]>;
+  string_starts_with?: InputMaybe<Scalars["String"]>;
 };
 
 export type NestedStringFilter = {
@@ -1094,7 +1127,7 @@ export type SessionUpdateManyWithWhereWithoutUserInput = {
   where: SessionScalarWhereInput;
 };
 
-export type SessionUpdateManyWithoutUserInput = {
+export type SessionUpdateManyWithoutUserNestedInput = {
   connect?: InputMaybe<Array<SessionWhereUniqueInput>>;
   connectOrCreate?: InputMaybe<Array<SessionCreateOrConnectWithoutUserInput>>;
   create?: InputMaybe<Array<SessionCreateWithoutUserInput>>;
@@ -1232,7 +1265,7 @@ export type UserRelationFilter = {
   isNot?: InputMaybe<UserWhereInput>;
 };
 
-export type UserUpdateOneRequiredWithoutModulesInput = {
+export type UserUpdateOneRequiredWithoutModulesNestedInput = {
   connect?: InputMaybe<UserWhereUniqueInput>;
   connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutModulesInput>;
   create?: InputMaybe<UserCreateWithoutModulesInput>;
@@ -1241,13 +1274,13 @@ export type UserUpdateOneRequiredWithoutModulesInput = {
 };
 
 export type UserUpdateWithoutModulesInput = {
-  accounts?: InputMaybe<AccountUpdateManyWithoutUserInput>;
+  accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
   email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   image?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   name?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  sessions?: InputMaybe<SessionUpdateManyWithoutUserInput>;
+  sessions?: InputMaybe<SessionUpdateManyWithoutUserNestedInput>;
 };
 
 export type UserUpsertWithoutModulesInput = {
@@ -1295,7 +1328,7 @@ export type CreateFileAttachmentMutationVariables = Exact<{
 
 export type CreateFileAttachmentMutation = {
   __typename?: "Mutation";
-  createFileAttachment: {
+  createOneFileAttachment: {
     __typename?: "FileAttachment";
     highlights?: any | null;
     moduleId: string;
@@ -1323,7 +1356,7 @@ export type DeleteFileAttachmentMutationVariables = Exact<{
 
 export type DeleteFileAttachmentMutation = {
   __typename?: "Mutation";
-  deleteFileAttachment?: {
+  deleteOneFileAttachment?: {
     __typename?: "FileAttachment";
     id: string;
     fileUrl: string;
@@ -1339,7 +1372,7 @@ export type UpdateFileAttachmentMutationVariables = Exact<{
 
 export type UpdateFileAttachmentMutation = {
   __typename?: "Mutation";
-  updateFileAttachment?: {
+  updateOneFileAttachment?: {
     __typename?: "FileAttachment";
     id: string;
     fileUrl: string;
@@ -1381,7 +1414,7 @@ export type UpsertFileAttachmentMutationVariables = Exact<{
 
 export type UpsertFileAttachmentMutation = {
   __typename?: "Mutation";
-  upsertFileAttachment: {
+  upsertOneFileAttachment: {
     __typename?: "FileAttachment";
     id: string;
     moduleId: string;
@@ -1412,7 +1445,7 @@ export type CreateModuleMutationVariables = Exact<{
 
 export type CreateModuleMutation = {
   __typename?: "Mutation";
-  createModule: {
+  createOneModule: {
     __typename?: "Module";
     id: string;
     name: string;
@@ -1438,7 +1471,7 @@ export type UpdateModuleMutationVariables = Exact<{
 
 export type UpdateModuleMutation = {
   __typename?: "Mutation";
-  updateModule?: {
+  updateOneModule?: {
     __typename?: "Module";
     id: string;
     name: string;
@@ -1463,7 +1496,7 @@ export type DeleteModuleMutationVariables = Exact<{
 
 export type DeleteModuleMutation = {
   __typename?: "Mutation";
-  deleteModule?: {
+  deleteOneModule?: {
     __typename?: "Module";
     id: string;
     name: string;
@@ -1560,7 +1593,7 @@ export const CreateFileAttachmentDocument = {
         selections: [
           {
             kind: "Field",
-            name: { kind: "Name", value: "createFileAttachment" },
+            name: { kind: "Name", value: "createOneFileAttachment" },
             arguments: [
               {
                 kind: "Argument",
@@ -1693,7 +1726,7 @@ export const DeleteFileAttachmentDocument = {
         selections: [
           {
             kind: "Field",
-            name: { kind: "Name", value: "deleteFileAttachment" },
+            name: { kind: "Name", value: "deleteOneFileAttachment" },
             arguments: [
               {
                 kind: "Argument",
@@ -1761,7 +1794,7 @@ export const UpdateFileAttachmentDocument = {
         selections: [
           {
             kind: "Field",
-            name: { kind: "Name", value: "updateFileAttachment" },
+            name: { kind: "Name", value: "updateOneFileAttachment" },
             arguments: [
               {
                 kind: "Argument",
@@ -1978,7 +2011,7 @@ export const UpsertFileAttachmentDocument = {
         selections: [
           {
             kind: "Field",
-            name: { kind: "Name", value: "upsertFileAttachment" },
+            name: { kind: "Name", value: "upsertOneFileAttachment" },
             arguments: [
               {
                 kind: "Argument",
@@ -2103,7 +2136,7 @@ export const CreateModuleDocument = {
         selections: [
           {
             kind: "Field",
-            name: { kind: "Name", value: "createModule" },
+            name: { kind: "Name", value: "createOneModule" },
             arguments: [
               {
                 kind: "Argument",
@@ -2247,7 +2280,7 @@ export const UpdateModuleDocument = {
         selections: [
           {
             kind: "Field",
-            name: { kind: "Name", value: "updateModule" },
+            name: { kind: "Name", value: "updateOneModule" },
             arguments: [
               {
                 kind: "Argument",
@@ -2385,7 +2418,7 @@ export const DeleteModuleDocument = {
         selections: [
           {
             kind: "Field",
-            name: { kind: "Name", value: "deleteModule" },
+            name: { kind: "Name", value: "deleteOneModule" },
             arguments: [
               {
                 kind: "Argument",

@@ -9,7 +9,7 @@ query Modules($where: ModuleWhereInput) {
 }
 
 mutation CreateModule($data: ModuleCreateInput!) {
-  createModule(data: $data) {
+  createOneModule(data: $data) {
     id
     name
     type
@@ -30,7 +30,7 @@ mutation UpdateModule(
   $data: ModuleUpdateInput!
   $where: ModuleWhereUniqueInput!
 ) {
-  updateModule(data: $data, where: $where) {
+  updateOneModule(data: $data, where: $where) {
     id
     name
     type
@@ -48,7 +48,7 @@ mutation UpdateManyModule(
 }
 
 mutation DeleteModule($where: ModuleWhereUniqueInput!) {
-  deleteModule(where: $where) {
+  deleteOneModule(where: $where) {
     id
     name
     type
