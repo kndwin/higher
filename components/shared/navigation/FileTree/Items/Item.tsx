@@ -173,10 +173,12 @@ export const Item = forwardRef<HTMLDivElement, Props>(
             )}
             {isEditLabel ? (
               <Input
+                css={{ width: "100%", pointerEvents: "all" }}
                 ref={labelRef}
                 autoFocus
                 value={label}
                 size={8}
+                type="text"
                 onBlur={() => handleItemUpdate({ label })}
                 onChange={(e) => setLabel(e.target.value)}
                 onKeyDown={(e) => {

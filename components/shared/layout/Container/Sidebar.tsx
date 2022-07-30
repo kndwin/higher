@@ -40,17 +40,19 @@ export const Sidebar = ({
         } else {
           setSidebarWidth(width);
         }
+      } else {
+        e.preventDefault();
       }
     },
     [isResizing, setSidebarWidth]
   );
 
   useEffect(() => {
-    window.addEventListener("mousemove", resize as any);
-    window.addEventListener("mouseup", stopResizing as any);
+    document.addEventListener("mousemove", resize as any);
+    document.addEventListener("mouseup", stopResizing as any);
     return () => {
-      window.removeEventListener("mousemove", resize as any);
-      window.removeEventListener("mouseup", stopResizing as any);
+      document.removeEventListener("mousemove", resize as any);
+      document.removeEventListener("mouseup", stopResizing as any);
     };
   }, [resize, stopResizing]);
 
@@ -71,7 +73,6 @@ export const Sidebar = ({
         ...css,
       }}
       ref={sidebarRef}
-      onMouseDown={(e: MouseEvent) => e.preventDefault()}
     >
       <Content>
         <Flex css={{ justifyContent: "space-between" }}>

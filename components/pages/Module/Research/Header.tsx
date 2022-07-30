@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Container, Breadcrumbs } from "components/shared";
 import { HomeIcon, BoxIcon, FileIcon } from "components/icons";
 import { useFiles, useModules } from "hooks";
+import type { ModulePayload } from "hooks/graphql/useModules";
 
 export const Header = () => {
   const { selectedModule, setSelectedModule, modules } = useModules();
@@ -15,10 +16,11 @@ export const Header = () => {
 
   useEffect(() => {
     if (modules.length > 0) {
-      let moduleToSet;
+      let moduleToSet: ModulePayload;
       if (!Boolean(selectedModule)) {
-        moduleToSet = modules.find((m) => m.id === router.query?.id);
-        console.log({ modules });
+        moduleToSet = modules.find(
+          (m) => m.id === router.query?.id
+        ) as ModulePayload;
         setSelectedModule(moduleToSet);
       } else {
         moduleToSet = selectedModule;
