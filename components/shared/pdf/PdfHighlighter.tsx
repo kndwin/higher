@@ -649,7 +649,7 @@ const MouseSelection = ({ onSelection }: any) => {
     <Flex ref={containerRef} css={{ position: "block" }}>
       {Boolean(start) && Boolean(end) && (
         <StyledMouseBorder
-          css={{
+          style={{
             ...getBoundingRect({ start, end }),
           }}
         />

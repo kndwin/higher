@@ -11,7 +11,7 @@ export const Input = styled("input", {
   color: "$slate12",
   display: "flex",
   alignItems: "center",
-  // transition: "all 0.2s ease-in-out",
+  transition: "all 0.2s ease-in-out",
   borderWidth: 1,
   borderStyle: "solid",
   borderColor: "$slate7",

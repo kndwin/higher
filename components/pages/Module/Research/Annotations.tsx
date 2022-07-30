@@ -13,13 +13,28 @@ import { CrossIcon } from "components/icons";
 import { IHighlight } from "components/shared/pdf";
 import { useFileAttachments, useFiles } from "hooks";
 
+import {
+  useResizer,
+  Resizer,
+} from "components/shared/layout/Container/Resizer";
+
 interface Props {
   css?: CSS;
 }
 
+const WIDTH = { MIN: 300, MAX: 600 };
+
 export const Annotations = ({ css }: Props) => {
   const { updateFileAttachment, fileAttachmentsResult } = useFileAttachments();
   const { selectedFile, highlights, setHighlights } = useFiles();
+  const [width, setWidth] = useState(WIDTH.MAX);
+
+  const { isResizing, startResizing, ref } = useResizer({
+    setWidth,
+    min: WIDTH.MIN,
+    max: WIDTH.MAX,
+    direction: "left",
+  });
 
   useEffect(() => {
     if (Boolean(selectedFile) && Boolean(fileAttachmentsResult.data)) {
@@ -94,17 +109,27 @@ export const Annotations = ({ css }: Props) => {
 
   return (
     <Flex
+      ref={ref}
       css={{
         ...css,
         flexDirection: "column",
         gap: "$3",
-        width: "100%",
         overflowY: "auto",
         alignItems: "flex-start",
         justifyContent: "flex-start",
         p: "$3",
+        marginLeft: "$1",
+        flex: 1,
+        position: "relative",
+        transition: `${!isResizing && "all"} 0.2s ease-in-out`,
+      }}
+      style={{
+        width,
+        maxWidth: width,
+        minWidth: width,
       }}
     >
+      <Resizer css={{ left: 0 }} onMouseDown={startResizing as any} />
       {highlights?.map((highlight: IHighlight) => (
         <Card
           onClick={() => handleHighlightScrollToView({ highlight })}
@@ -182,6 +207,8 @@ export const Annotations = ({ css }: Props) => {
     </Flex>
   );
 };
+
+const Box = styled("div");
 
 const RTE = ({ initialText, updateComment, css }: any) => {
   const [rteText, setRteText] = useState(initialText);

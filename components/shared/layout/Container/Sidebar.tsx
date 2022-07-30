@@ -7,6 +7,10 @@ import { LogoIcon, DoubleChevronIcon } from "components/icons";
 
 import { SIDEBAR_WIDTH, ContainerContext } from "./Container";
 import { CSS } from "@stitches/react/types/css-util";
+import {
+  useResizer,
+  Resizer,
+} from "components/shared/layout/Container/Resizer";
 
 export const Sidebar = ({
   children,
@@ -17,44 +21,12 @@ export const Sidebar = ({
 }) => {
   const { setSidebarWidth, sidebarWidth, setIsSidebarOpen, isSidebarOpen } =
     useContext(ContainerContext);
-  const sidebarRef = useRef(null);
-  const [isResizing, setIsResizing] = useState(false);
 
-  const startResizing = useCallback((e: MouseEvent) => {
-    setIsResizing(true);
-  }, []);
-
-  const stopResizing = useCallback((e: MouseEvent) => {
-    setIsResizing(false);
-  }, []);
-
-  const resize = useCallback(
-    (e: MouseEvent) => {
-      if (isResizing) {
-        const width =
-          e.clientX - sidebarRef.current.getBoundingClientRect().left;
-        if (width < SIDEBAR_WIDTH.MIN) {
-          setSidebarWidth(SIDEBAR_WIDTH.MIN);
-        } else if (width > SIDEBAR_WIDTH.MAX) {
-          setSidebarWidth(SIDEBAR_WIDTH.MAX);
-        } else {
-          setSidebarWidth(width);
-        }
-      } else {
-        e.preventDefault();
-      }
-    },
-    [isResizing, setSidebarWidth]
-  );
-
-  useEffect(() => {
-    document.addEventListener("mousemove", resize as any);
-    document.addEventListener("mouseup", stopResizing as any);
-    return () => {
-      document.removeEventListener("mousemove", resize as any);
-      document.removeEventListener("mouseup", stopResizing as any);
-    };
-  }, [resize, stopResizing]);
+  const { isResizing, startResizing, ref } = useResizer({
+    setWidth: setSidebarWidth,
+    min: SIDEBAR_WIDTH.MIN,
+    max: SIDEBAR_WIDTH.MAX,
+  });
 
   const handleSidebarClose = () => {
     setIsSidebarOpen(false);
@@ -63,16 +35,18 @@ export const Sidebar = ({
 
   return (
     <Container
-      css={{
-        transition: `${!isResizing && "all"} 0.2s ease-in-out`,
+      style={{
         width: sidebarWidth,
         maxWidth: sidebarWidth,
+      }}
+      css={{
+        transition: `${!isResizing && "all"} 0.2s ease-in-out`,
         minWidth: isSidebarOpen ? SIDEBAR_WIDTH.MIN : 0,
         opacity: isSidebarOpen ? "1" : "0",
         borderWidth: isSidebarOpen ? "3px" : "0",
         ...css,
       }}
-      ref={sidebarRef}
+      ref={ref}
     >
       <Content>
         <Flex css={{ justifyContent: "space-between" }}>
@@ -85,7 +59,7 @@ export const Sidebar = ({
         </Flex>
         {children}
       </Content>
-      <Resizer onMouseDown={startResizing} />
+      <Resizer css={{ right: 0 }} onMouseDown={startResizing as any} />
     </Container>
   );
 };
@@ -105,17 +79,4 @@ const Content = styled("div", {
   flexDirection: "column",
   p: "$3",
   width: "100%",
-});
-
-const Resizer = styled("div", {
-  position: "absolute",
-  right: 0,
-  width: "$2",
-  height: "100%",
-  justifySelf: "flex-end",
-  cursor: "col-resize",
-  resize: "horizontal",
-  "&:hover": {
-    background: "$slate4",
-  },
 });
