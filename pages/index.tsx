@@ -25,9 +25,9 @@ export default function Home() {
     <Container type="page">
       <Header />
       <TextContainer>
-        <StyledText>Read.</StyledText>
-        <StyledText>Think.</StyledText>
-        <StyledText>Write.</StyledText>
+        <StyledText as="h1">Read.</StyledText>
+        <StyledText as="h1">Think.</StyledText>
+        <StyledText as="h1">Write.</StyledText>
       </TextContainer>
       <Text
         css={{ fz: "$4", mb: "$3", ta: "center", maw: "40ch" }}

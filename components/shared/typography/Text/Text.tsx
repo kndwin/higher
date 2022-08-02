@@ -34,20 +34,6 @@ export const Text = styled("span", {
         letterSpacing: "-.016em",
       },
     },
-    as: {
-      h1: {
-        fontSize: "$5",
-        fontWeight: "600",
-      },
-      h2: {
-        fontSize: "$4",
-        fontWeight: "400",
-      },
-      h3: {},
-      label: {},
-      span: {},
-      li: {},
-    },
     b: {
       true: {
         fontWeight: "bold",
