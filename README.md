@@ -2,7 +2,7 @@
 
 # Higher
 
-A monorepo for the front-end and back-end of Higher, the research assistant.
+Higher helps you make progress on that research when you don't want to.
 
 ## Documentation
 
