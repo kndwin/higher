@@ -148,7 +148,7 @@ export const Item = forwardRef<HTMLDivElement, Props>(
         {...props}
       >
         <Flex
-          css={{ width: "100%", justifyContent: "space-between" }}
+          css={{ width: "100%", justifyContent: "space-between", p: "$2" }}
           ref={ref}
           style={style}
         >
@@ -162,7 +162,7 @@ export const Item = forwardRef<HTMLDivElement, Props>(
               py: "$1",
             }}
           >
-            <Action css={{ size: "$3" }} {...handleProps}>
+            <Action css={{ size: "2em" }} {...handleProps}>
               {type === "file" && <FileIcon />}
               {type === "folder" && <FolderIcon />}
             </Action>
@@ -191,7 +191,7 @@ export const Item = forwardRef<HTMLDivElement, Props>(
               <Text
                 onClick={() => setIsEditLabel(true)}
                 css={{
-                  mr: "$2",
+                  mx: "$2",
                   width: "100%",
                   overflow: "hidden",
                   textOverflow: "ellipsis",

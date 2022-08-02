@@ -1,16 +1,37 @@
 import { styled } from "stitches.config";
 
-export const Text = styled("p", {
+export const Text = styled("span", {
+  // Reset
+  lineHeight: "1",
+  margin: "0",
+  fontWeight: 400,
+  fontVariantNumeric: "tabular-nums",
+  display: "block",
   fontFamily: "$primary",
   fontSize: "$2",
-  margin: 0,
   whiteSpace: "pre-wrap",
-  lineHeight: "1.2em",
+  color: "$slate12",
   variants: {
-    title: {
-      true: {
+    size: {
+      "1": {
+        fontSize: "$1",
+      },
+      "2": {
+        fontSize: "$2",
+      },
+      "3": {
+        fontSize: "$3",
+      },
+      "4": {
+        fontSize: "$4",
+      },
+      "5": {
+        fontSize: "$5",
+        letterSpacing: "-.015em",
+      },
+      "6": {
         fontSize: "$6",
-        fontWeight: "bold",
+        letterSpacing: "-.016em",
       },
     },
     as: {
@@ -27,14 +48,10 @@ export const Text = styled("p", {
       span: {},
       li: {},
     },
-  },
-  compoundVariants: [
-    {
-      title: true,
-      as: "h1",
-      css: {
-        fontSize: "$6",
+    b: {
+      true: {
+        fontWeight: "bold",
       },
     },
-  ],
+  },
 });

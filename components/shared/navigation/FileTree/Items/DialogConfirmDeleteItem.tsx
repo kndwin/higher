@@ -42,7 +42,7 @@ export const DialogConfirmDeleteItem = ({ item, onRemove }) => {
   return (
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <Dialog.Trigger asChild>
-        <Action css={{ size: "$3" }}>
+        <Action css={{ size: "2em" }}>
           <CrossIcon />
         </Action>
       </Dialog.Trigger>

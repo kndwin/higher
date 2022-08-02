@@ -16,7 +16,7 @@ export const Button = styled("button", {
   px: "$3",
   py: "$2",
   border: "none",
-  br: "$1",
+  br: "$2",
   backgroundColor: "$slate3",
   color: "$slate12",
   display: "flex",
@@ -64,8 +64,8 @@ export const Button = styled("button", {
         },
       },
       accent: {
-        backgroundColor: "$cyan4",
-        color: "$cyan11",
+        backgroundColor: "$cyan3",
+        color: "$cyan12",
         "&:hover": {
           backgroundColor: "$cyan5",
         },

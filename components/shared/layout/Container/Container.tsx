@@ -88,7 +88,7 @@ const ToastInContainer = () => {
 };
 
 const StyledContainer = styled("div", {
-  $$pageWidth: "60em",
+  $$pageWidth: "70em",
   width: "100%",
   minHeight: "100vh",
   height: "100%",
@@ -101,6 +101,7 @@ const StyledContainer = styled("div", {
         alignItems: "center",
         justifyContent: "flex-start",
         mx: "auto",
+        px: "$3",
       },
       dashboard: {
         minWidth: "100vw",

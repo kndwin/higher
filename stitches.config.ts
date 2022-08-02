@@ -40,7 +40,7 @@ export const {
       ...purple,
       light: "#fafafa",
       dark: "#121212",
-      primaryGradient: "linear-gradient(99.26deg, #0894B3 0%, #84CDDA 107.7%)",
+      primaryGradient: "linear-gradient(120deg, #0894B3, #84CDDA)",
       primary: "$cyan10",
       error: "$red10",
       success: "$grass10",
@@ -106,6 +106,7 @@ export const {
     radii: {
       1: "4px",
       2: "8px",
+      3: "12px",
       round: "9999px",
     },
     sizes: {
@@ -137,84 +138,186 @@ export const {
     },
   },
   utils: {
-    // Abbreviated margin properties
-    m: (value: string) => ({
-      margin: value,
-    }),
-    mt: (value: string) => ({
-      marginTop: value,
-    }),
-    mr: (value: string) => ({
-      marginRight: value,
-    }),
-    mb: (value: string) => ({
-      marginBottom: value,
-    }),
-    ml: (value: string) => ({
-      marginLeft: value,
-    }),
-    mx: (value: string) => ({
-      marginLeft: value,
-      marginRight: value,
-    }),
-    my: (value: string) => ({
-      marginTop: value,
-      marginBottom: value,
-    }),
-    // Abbreviated padding properties
-    p: (value: string) => ({
-      padding: value,
-    }),
-    pt: (value: string) => ({
-      paddingTop: value,
-    }),
-    pr: (value: string) => ({
-      paddingRight: value,
-    }),
-    pb: (value: string) => ({
-      paddingBottom: value,
-    }),
-    pl: (value: string) => ({
-      paddingLeft: value,
-    }),
-    px: (value: string) => ({
-      paddingLeft: value,
-      paddingRight: value,
-    }),
-    py: (value: string) => ({
-      paddingTop: value,
-      paddingBottom: value,
-    }),
-
-    // A property for applying width/height together
-    size: (value: string) => ({
+    w: (value: Stitches.PropertyValue<"width">) => ({
       width: value,
-      height: value,
     }),
-    minSize: (value: string) => ({
+    maw: (value: Stitches.PropertyValue<"maxWidth">) => ({
+      maxWidth: value,
+    }),
+    miw: (value: Stitches.PropertyValue<"minWidth">) => ({
+      minWidth: value,
+    }),
+    minSize: (value: Stitches.PropertyValue<"minWidth">) => ({
       minWidth: value,
       minHeight: value,
     }),
-
-    // A property to apply linear gradient
-    linearGradient: (value: string) => ({
-      backgroundImage: `linear-gradient(${value})`,
+    h: (value: Stitches.PropertyValue<"height">) => ({
+      height: value,
+    }),
+    mah: (value: Stitches.PropertyValue<"maxHeight">) => ({
+      maxHeight: value,
+    }),
+    mih: (value: Stitches.PropertyValue<"minHeight">) => ({
+      minHeight: value,
+    }),
+    p: (value: Stitches.PropertyValue<"padding">) => ({
+      padding: value,
+    }),
+    pt: (value: Stitches.PropertyValue<"paddingTop">) => ({
+      paddingTop: value,
+    }),
+    pr: (value: Stitches.PropertyValue<"paddingRight">) => ({
+      paddingRight: value,
+    }),
+    pb: (value: Stitches.PropertyValue<"paddingBottom">) => ({
+      paddingBottom: value,
+    }),
+    pl: (value: Stitches.PropertyValue<"paddingLeft">) => ({
+      paddingLeft: value,
+    }),
+    px: (value: Stitches.PropertyValue<"paddingLeft">) => ({
+      paddingLeft: value,
+      paddingRight: value,
+    }),
+    py: (value: Stitches.PropertyValue<"paddingTop">) => ({
+      paddingTop: value,
+      paddingBottom: value,
+    }),
+    pos: (value: Stitches.PropertyValue<"position">) => ({ position: value }),
+    m: (value: Stitches.PropertyValue<"margin">) => ({
+      margin: value,
+    }),
+    mt: (value: Stitches.PropertyValue<"marginTop">) => ({
+      marginTop: value,
+    }),
+    mr: (value: Stitches.PropertyValue<"marginRight">) => ({
+      marginRight: value,
+    }),
+    mb: (value: Stitches.PropertyValue<"marginBottom">) => ({
+      marginBottom: value,
+    }),
+    ml: (value: Stitches.PropertyValue<"marginLeft">) => ({
+      marginLeft: value,
+    }),
+    mx: (value: Stitches.PropertyValue<"marginLeft">) => ({
+      marginLeft: value,
+      marginRight: value,
+    }),
+    my: (value: Stitches.PropertyValue<"marginTop">) => ({
+      marginTop: value,
+      marginBottom: value,
     }),
 
-    // An abbreviated property for border-radius
-    br: (value: string) => ({
+    ta: (value: Stitches.PropertyValue<"textAlign">) => ({ textAlign: value }),
+
+    d: (value: Stitches.PropertyValue<"display">) => ({ display: value }),
+    fd: (value: Stitches.PropertyValue<"flexDirection">) => ({
+      flexDirection: value,
+    }),
+    fw: (value: Stitches.PropertyValue<"fontWeight">) => ({
+      fontWeight: value,
+    }),
+    fxw: (value: Stitches.PropertyValue<"flexWrap">) => ({ flexWrap: value }),
+    ai: (value: Stitches.PropertyValue<"alignItems">) => ({
+      alignItems: value,
+    }),
+    ac: (value: Stitches.PropertyValue<"alignContent">) => ({
+      alignContent: value,
+    }),
+    as: (value: Stitches.PropertyValue<"alignSelf">) => ({ alignSelf: value }),
+    jc: (value: Stitches.PropertyValue<"justifyContent">) => ({
+      justifyContent: value,
+    }),
+    ji: (value: Stitches.PropertyValue<"justifyItems">) => ({
+      justifyItems: value,
+    }),
+    fg: (value: Stitches.PropertyValue<"flexGrow">) => ({ flexGrow: value }),
+    fs: (value: Stitches.PropertyValue<"flexShrink">) => ({
+      flexShrink: value,
+    }),
+    fz: (value: Stitches.PropertyValue<"fontSize">) => ({ fontSize: value }),
+    fb: (value: Stitches.PropertyValue<"flexBasis">) => ({ flexBasis: value }),
+    fx: (value: Stitches.PropertyValue<"flex">) => ({ flex: value }),
+
+    bc: (value: Stitches.PropertyValue<"backgroundColor">) => ({
+      backgroundColor: value,
+    }),
+
+    br: (value: Stitches.PropertyValue<"borderRadius">) => ({
       borderRadius: value,
     }),
-    gridRow: (value: string) => ({
+    btrr: (value: Stitches.PropertyValue<"borderTopRightRadius">) => ({
+      borderTopRightRadius: value,
+    }),
+    bbrr: (value: Stitches.PropertyValue<"borderBottomRightRadius">) => ({
+      borderBottomRightRadius: value,
+    }),
+    bblr: (value: Stitches.PropertyValue<"borderBottomLeftRadius">) => ({
+      borderBottomLeftRadius: value,
+    }),
+    btlr: (value: Stitches.PropertyValue<"borderTopLeftRadius">) => ({
+      borderTopLeftRadius: value,
+    }),
+
+    bs: (value: Stitches.PropertyValue<"boxShadow">) => ({ boxShadow: value }),
+
+    lh: (value: Stitches.PropertyValue<"lineHeight">) => ({
+      lineHeight: value,
+    }),
+
+    ox: (value: Stitches.PropertyValue<"overflowX">) => ({ overflowX: value }),
+    oy: (value: Stitches.PropertyValue<"overflowY">) => ({ overflowY: value }),
+
+    pe: (value: Stitches.PropertyValue<"pointerEvents">) => ({
+      pointerEvents: value,
+    }),
+    us: (value: Stitches.PropertyValue<"userSelect">) => ({
+      WebkitUserSelect: value,
+      userSelect: value,
+    }),
+
+    userSelect: (value: Stitches.PropertyValue<"userSelect">) => ({
+      WebkitUserSelect: value,
+      userSelect: value,
+    }),
+
+    size: (value: Stitches.PropertyValue<"width">) => ({
+      minWidth: value,
+      minHeight: value,
+      width: value,
+      height: value,
+    }),
+    cur: (value: Stitches.PropertyValue<"cursor">) => ({
+      cursor: value,
+    }),
+    appearance: (value: Stitches.PropertyValue<"appearance">) => ({
+      WebkitAppearance: value,
+      appearance: value,
+    }),
+    backgroundClip: (value: Stitches.PropertyValue<"backgroundClip">) => ({
+      WebkitBackgroundClip: value,
+      backgroundClip: value,
+    }),
+    lg: (value: Stitches.PropertyValue<"backgroundImage">) => ({
+      backgroundImage: value,
+    }),
+    gtc: (value: Stitches.PropertyValue<"gridTemplateColumns">) => ({
+      gridTemplateColumns: value,
+    }),
+    gtr: (value: Stitches.PropertyValue<"gridTemplateRows">) => ({
       gridTemplateRows: value,
     }),
-    gridCol: (value: string) => ({
-      gridTemplateColumns: value,
+    gcg: (value: Stitches.PropertyValue<"columnGap">) => ({
+      columnGap: value,
+    }),
+    grg: (value: Stitches.PropertyValue<"rowGap">) => ({
+      rowGap: value,
     }),
   },
   media: {
-    bp1: "(min-width: 520px)",
-    bp2: "(min-width: 900px)",
+    bp1: "(min-width: 640px)",
+    bp2: "(min-width: 1024px)",
+    bp3: "(min-width: 1280px)",
   },
 });
 

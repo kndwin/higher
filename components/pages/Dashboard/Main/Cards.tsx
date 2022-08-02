@@ -31,7 +31,7 @@ export const Cards = ({ modules }: { modules: ModulePayload[] }) => {
 
   return (
     <Dialog>
-      <Grid css={{ mt: "$3", gridCol: "repeat(auto-fill, minmax(15em, 1fr))" }}>
+      <Grid css={{ mt: "$3", gtc: "repeat(auto-fill, minmax(15em, 1fr))" }}>
         {modules?.map((module: ModulePayload) => (
           <StyledCardContainer key={module.id}>
             <Card

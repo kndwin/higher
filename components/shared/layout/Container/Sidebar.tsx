@@ -7,10 +7,7 @@ import { LogoIcon, DoubleChevronIcon } from "components/icons";
 
 import { SIDEBAR_WIDTH, ContainerContext } from "./Container";
 import { CSS } from "@stitches/react/types/css-util";
-import {
-  useResizer,
-  Resizer,
-} from "components/shared/layout/Container/Resizer";
+import { useResizer, Resizer } from "./Resizer";
 
 export const Sidebar = ({
   children,
