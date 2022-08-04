@@ -62,3 +62,5 @@ const DropdownMenuProfile = () => {
     </DropdownMenu>
   );
 };
+
+const ButtonDarkMode = () => {};

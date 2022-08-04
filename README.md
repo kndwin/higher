@@ -1,6 +1,7 @@
-<img src="./public/logo.svg" width="100%" />
-
-# Higher
+<div align="center">
+	<img src="./public/logo.svg" alt="Logo" width="80" height="80" />
+	<h1 >Higher</h1>
+</div>
 
 Higher helps you make progress on that research when you don't want to.
 

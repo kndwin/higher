@@ -15,35 +15,6 @@ export const PaperPlaneIcon = () => (
   </svg>
 );
 
-export const LogoIcon = () => (
-  <svg
-    width="42"
-    height="38"
-    viewBox="0 0 42 38"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M17 34V38H25V34H17ZM21 4L23.8284 1.17157C22.2663 -0.390525 19.7337 -0.390524 18.1716 1.17157L21 4ZM3.17157 16.1716L0.343146 19L6 24.6569L8.82843 21.8284L3.17157 16.1716ZM33.1716 21.8284L36 24.6569L41.6569 19L38.8284 16.1716L33.1716 21.8284ZM25 34V4H17V34H25ZM8.82843 21.8284L23.8284 6.82843L18.1716 1.17157L3.17157 16.1716L8.82843 21.8284ZM18.1716 6.82843L33.1716 21.8284L38.8284 16.1716L23.8284 1.17157L18.1716 6.82843Z"
-      fill="url(#paint0_linear_7_192)"
-    />
-    <defs>
-      <linearGradient
-        id="paint0_linear_7_192"
-        x1="36"
-        y1="-7.59091"
-        x2="43.2683"
-        y2="33.3695"
-        gradientUnits="userSpaceOnUse"
-      >
-        <stop stopColor="#0894B3" />
-        <stop offset="0.577926" stopColor="#84CDDA" />
-        <stop offset="0.953125" stopColor="white" />
-      </linearGradient>
-    </defs>
-  </svg>
-);
-
 interface ChevronIconProps {
   orientation?: "left" | "right" | "up" | "down";
 }
@@ -265,5 +236,41 @@ export const PlusIcon = () => (
       fillRule="evenodd"
       clipRule="evenodd"
     ></path>
+  </svg>
+);
+
+export const LogoIcon = () => (
+  <svg
+    width="30"
+    height="30"
+    viewBox="0 0 30 30"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle cx="15" cy="15" r="15" fill="white" />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M11.1202 16.8337C11.2881 17.0457 11.5694 17.0565 11.7484 16.8577L15 13.2477L18.2516 16.8577C18.4307 17.0565 18.7119 17.0457 18.8798 16.8337C19.0477 16.6216 19.0386 16.2885 18.8596 16.0897L15.304 12.1423C15.133 11.9526 14.867 11.9526 14.696 12.1423L11.1405 16.0897C10.9614 16.2885 10.9523 16.6216 11.1202 16.8337Z"
+      fill="black"
+    />
+  </svg>
+);
+
+const IconSvg = () => (
+  <svg
+    width="30"
+    height="30"
+    viewBox="0 0 30 30"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle cx="15" cy="15" r="15" fill="white" />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M11.1202 16.8337C11.2881 17.0457 11.5694 17.0565 11.7484 16.8577L15 13.2477L18.2516 16.8577C18.4307 17.0565 18.7119 17.0457 18.8798 16.8337C19.0477 16.6216 19.0386 16.2885 18.8596 16.0897L15.304 12.1423C15.133 11.9526 14.867 11.9526 14.696 12.1423L11.1405 16.0897C10.9614 16.2885 10.9523 16.6216 11.1202 16.8337Z"
+      fill="black"
+    />
   </svg>
 );
