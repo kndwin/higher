@@ -4,8 +4,10 @@ import { Provider as GraphQLClientProvider } from "urql";
 import { client as graphqlClient } from "graphql/client";
 import { Provider as ToastProvider } from "@radix-ui/react-toast";
 import { Provider as TooltipProvider } from "@radix-ui/react-tooltip";
+import { ThemeProvider } from "next-themes";
 import type { ReactNode, FC } from "react";
 import type { Session } from "next-auth";
+import { darkTheme } from "stitches.config";
 
 const composeWrappers = (wrappers: FC[]): FC => {
   return wrappers.reduce((Acc: FC, Current: any) => {
@@ -31,6 +33,18 @@ export const SuperProviders: any = composeWrappers([
   ),
   ({ children }: { children: JSX.Element }) => (
     <TooltipProvider>{children}</TooltipProvider>
+  ),
+  ({ children }: { children: JSX.Element }) => (
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      value={{
+        light: "light",
+        dark: darkTheme.className,
+      }}
+    >
+      {children}
+    </ThemeProvider>
   ),
 ]);
 

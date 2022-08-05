@@ -10,6 +10,7 @@ export { Input } from "./input/Input/Input";
 export { Icon } from "./input/Icon/Icon";
 export { Textarea } from "./input/Textarea/Textarea";
 export { RichTextEditor } from "./input/RichTextEditor/RichTextEditor";
+export { IconButton } from "./input/IconButton/IconButton";
 
 // Typography
 export { Text } from "./typography/Text/Text";

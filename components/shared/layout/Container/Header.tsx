@@ -1,8 +1,17 @@
 import { useContext, forwardRef } from "react";
 import { useSession, signOut } from "next-auth/react";
+import { useTheme } from "next-themes";
+import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 
 import { styled } from "stitches.config";
-import { Icon, Flex, Avatar, DropdownMenu, Text } from "components/shared";
+import {
+  Icon,
+  Flex,
+  Avatar,
+  DropdownMenu,
+  Button,
+  IconButton,
+} from "components/shared";
 import { DoubleChevronIcon, PersonIcon } from "components/icons";
 
 import { ContainerContext, SIDEBAR_WIDTH } from "./Container";
@@ -27,7 +36,10 @@ export const Header = ({ children }) => {
           )}
           {children}
         </Flex>
-        <DropdownMenuProfile />
+        <Flex css={{ gap: "$2", width: "fit-content" }}>
+          <ButtonDarkMode />
+          <DropdownMenuProfile />
+        </Flex>
       </Flex>
     </StyledHeader>
   );
@@ -63,4 +75,12 @@ const DropdownMenuProfile = () => {
   );
 };
 
-const ButtonDarkMode = () => {};
+export const ButtonDarkMode = () => {
+  const { theme, setTheme } = useTheme();
+  const toggleTheme = () => setTheme(theme === "light" ? "dark" : "light");
+  return (
+    <IconButton css={{ br: "$round", size: "$4" }} onClick={toggleTheme}>
+      {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+    </IconButton>
+  );
+};

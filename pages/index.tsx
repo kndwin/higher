@@ -5,6 +5,7 @@ import { signIn, useSession } from "next-auth/react";
 import { Container, Text, Button, Icon } from "components/shared";
 import { styled } from "stitches.config";
 import { LogoIcon } from "components/icons";
+import { ButtonDarkMode } from "components/shared/layout/Container/Header";
 import {
   GitHubLogoIcon,
   LightningBoltIcon,
@@ -30,6 +31,7 @@ export default function Home() {
           <Text b>Higher</Text>
         </Box>
         <Box css={{ d: "flex", ai: "center", gap: "$3" }}>
+          <ButtonDarkMode />
           <IconContainer
             as="a"
             href="https://github.com/kndwin/higher"
@@ -221,7 +223,7 @@ const StyledHeaderContainer = styled("header", {
   height: "5em",
   gap: "$2",
   br: "$3",
-  background: "rgba(200, 200, 200, .3)",
+  background: "$headerGlassBackground",
   backdropFilter: "blur(10px)",
   w: "100%",
   maw: "70em",

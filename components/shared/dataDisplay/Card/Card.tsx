@@ -11,7 +11,7 @@ const fadeLeftToRight = keyframes({
 });
 
 export const Card = styled("div", {
-  backgroundColor: "white",
+  backgroundColor: "$slate1",
   br: "$2",
   padding: "$3",
   boxShadow: "$2",

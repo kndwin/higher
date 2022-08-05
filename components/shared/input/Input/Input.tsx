@@ -7,7 +7,7 @@ export const Input = styled("input", {
   py: "$2",
   border: "none",
   br: "$1",
-  backgroundColor: "white",
+  backgroundColor: "$slate1",
   color: "$slate12",
   display: "flex",
   alignItems: "center",
