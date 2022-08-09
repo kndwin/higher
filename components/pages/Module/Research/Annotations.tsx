@@ -27,7 +27,7 @@ const WIDTH = { MIN: 300, MAX: 600 };
 export const Annotations = ({ css }: Props) => {
   const { updateFileAttachment, fileAttachmentsResult } = useFileAttachments();
   const { selectedFile, highlights, setHighlights } = useFiles();
-  const [width, setWidth] = useState(WIDTH.MAX);
+  const [width, setWidth] = useState(WIDTH.MIN);
 
   const { isResizing, startResizing, ref } = useResizer({
     setWidth,

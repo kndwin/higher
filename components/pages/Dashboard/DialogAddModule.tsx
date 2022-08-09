@@ -50,6 +50,7 @@ export const DialogAddModule = () => {
       fileStructure: [newFolder],
     };
     const createdModule = await createModule({ data: createModuleData });
+
     setDialogOpen(false);
   };
 

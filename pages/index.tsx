@@ -37,6 +37,7 @@ export default function Home() {
             href="https://github.com/kndwin/higher"
             target="_blank"
             css={{
+              color: "$slate12",
               textDecoration: "none",
               "&:visited, &:focus, &:active": { color: "inherit" },
             }}

@@ -147,22 +147,9 @@ export const Item = forwardRef<HTMLDivElement, Props>(
         onClick={() => handleFileSelection()}
         {...props}
       >
-        <Flex
-          css={{ width: "100%", justifyContent: "space-between", p: "$2" }}
-          ref={ref}
-          style={style}
-        >
-          <Flex
-            css={{
-              display: "contents",
-              gap: "$1",
-              width: "100%",
-              justifyContent: "flex-start",
-              px: "$2",
-              py: "$1",
-            }}
-          >
-            <Action css={{ size: "2em" }} {...handleProps}>
+        <StyledItemContainer ref={ref} style={style}>
+          <StyledFileLabelContainer>
+            <Action css={{ size: "2em", color: "$slate12" }} {...handleProps}>
               {type === "file" && <FileIcon />}
               {type === "folder" && <FolderIcon />}
             </Action>
@@ -188,20 +175,11 @@ export const Item = forwardRef<HTMLDivElement, Props>(
                 }}
               />
             ) : (
-              <Text
-                onClick={() => setIsEditLabel(true)}
-                css={{
-                  mx: "$2",
-                  width: "100%",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  whiteSpace: "nowrap",
-                }}
-              >
+              <StyledFileLabel onClick={() => setIsEditLabel(true)}>
                 {label}
-              </Text>
+              </StyledFileLabel>
             )}
-          </Flex>
+          </StyledFileLabelContainer>
           {type === "folder" && (
             <Action onClick={() => fileRef.current.click()}>
               <PlusIcon />
@@ -215,8 +193,8 @@ export const Item = forwardRef<HTMLDivElement, Props>(
           )}
           <Flex
             css={{
-              width: "fit-content",
-              justifyContent: "flex-start",
+              w: "fit-content",
+              jc: "flex-start",
             }}
           >
             {!clone && onRemove && (
@@ -229,11 +207,35 @@ export const Item = forwardRef<HTMLDivElement, Props>(
               <Text as="span">{childCount}</Text>
             ) : null}
           </Flex>
-        </Flex>
+        </StyledItemContainer>
       </Li>
     );
   }
 );
+
+const StyledItemContainer = styled(Flex, {
+  stroke: "$slate12",
+  width: "100%",
+  justifyContent: "space-between",
+  p: "$2",
+});
+
+const StyledFileLabelContainer = styled(Text, {
+  display: "contents",
+  gap: "$1",
+  width: "100%",
+  justifyContent: "flex-start",
+  px: "$2",
+  py: "$1",
+});
+
+const StyledFileLabel = styled(Text, {
+  mx: "$2",
+  width: "100%",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+});
 
 const HiddenInput = styled("input", {
   display: "none",
