@@ -27,6 +27,7 @@ export const {
   globalCss,
   styled,
   theme,
+  keyframes,
 } = createStitches({
   theme: {
     colors: {

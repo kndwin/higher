@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useState, useEffect, ReactNode } from "react";
 import { useRouter } from "next/router";
 import { signIn, useSession } from "next-auth/react";
@@ -12,6 +13,50 @@ import {
   ViewGridIcon,
   ArchiveIcon,
 } from "@radix-ui/react-icons";
+
+const features = [
+  {
+    label: "Open Source",
+    icon: <GitHubLogoIcon />,
+    description: "The power of OSS",
+    linearGradient: "linear-gradient(120deg, $red3, $violet3)",
+  },
+  {
+    label: "Blazingly fast",
+    icon: <LightningBoltIcon />,
+    description: "Document at the speed of thought",
+    linearGradient: "linear-gradient(120deg, $grass3, $cyan4)",
+  },
+  {
+    label: "Organized",
+    icon: <ViewGridIcon />,
+    description: "Everything, in one place, as it should be",
+    linearGradient: "linear-gradient(120deg, $amber3, $orange3)",
+  },
+  {
+    label: "Free Forever*",
+    icon: <ArchiveIcon />,
+    description: "* maybe for like, $3",
+    linearGradient: "linear-gradient(120deg, $red3, $hlPeach4)",
+  },
+];
+
+const testimonies = [
+  {
+    avatar: "/tina.svg",
+    name: "Tina",
+    title: "Masters in Teaching",
+    quote:
+      "Love it, been using it for university and it's a life saver. I really like how the annotations for the PDF's are stacked next to each other. It saves so much time!",
+  },
+  {
+    avatar: "/kevin.svg",
+    name: "Kevin",
+    title: "Bachelor in Physiotherapy",
+    quote:
+      "It's not Microsoft Word, but slowly the features are getting there! I like how it's all free and kinda works???",
+  },
+];
 
 export default function Home() {
   const { data } = useSession();
@@ -58,74 +103,51 @@ export default function Home() {
           {`helps you make progress on that research when you don't want to.`}
         </Text>
         <Grid css={{ mt: "$4" }}>
-          <StyledCard css={{ lg: "linear-gradient(120deg, $red3, $violet3)" }}>
-            <Title>
-              <IconContainer>
-                <GitHubLogoIcon />
-              </IconContainer>
-              <Text b size="4">
-                Open source
-              </Text>
-            </Title>
-            <Text css={{ mt: "$3" }}>Build your own!</Text>
-          </StyledCard>
-          <StyledCard css={{ lg: "linear-gradient(120deg, $grass3, $cyan4)" }}>
-            <Title>
-              <IconContainer>
-                <LightningBoltIcon />
-              </IconContainer>
-              <Text b size="4">
-                Blazingly fast
-              </Text>
-            </Title>
-            <Text css={{ mt: "$3" }}>Build with speed</Text>
-          </StyledCard>
-          <StyledCard
-            css={{ lg: "linear-gradient(120deg, $amber3, $orange3)" }}
-          >
-            <Title>
-              <IconContainer>
-                <ViewGridIcon />
-              </IconContainer>
-              <Text b size="4">
-                Organize
-              </Text>
-            </Title>
-            <Text css={{ mt: "$3" }}>All in one place</Text>
-          </StyledCard>
-          <StyledCard css={{ lg: "linear-gradient(120deg, $red3, $hlPeach4)" }}>
-            <Title>
-              <IconContainer>
-                <ArchiveIcon />
-              </IconContainer>
-              <Text b size="4">
-                Free-tier
-              </Text>
-            </Title>
-            <Text css={{ mt: "$3" }}>512MB of free storage</Text>
-          </StyledCard>
+          {features.map((feature) => (
+            <StyledCard
+              key={feature.label}
+              css={{ lg: feature.linearGradient }}
+            >
+              <Title>
+                <IconContainer>{feature.icon}</IconContainer>
+                <Text b size="4">
+                  {feature.label}
+                </Text>
+              </Title>
+              <Text css={{ mt: "$3" }}>{feature.description}</Text>
+            </StyledCard>
+          ))}
         </Grid>
         <Text
           as="h2"
           css={{ mt: "$6", fz: "$5", fw: "bold", "@bp1": { fz: "$6" } }}
         >{`Testimonies`}</Text>
-        <TestimonyCard>
-          <Avatar
-            src="https://media-exp1.licdn.com/dms/image/C5603AQFXSnDtMVTC_w/profile-displayphoto-shrink_800_800/0/1629096419596?e=1665014400&v=beta&t=-JP7-wXIU4leQp8cQoQlCAOH7HvZSVfdJyc6TAw0dmI"
-            alt="Profile"
-          />
-          <Box css={{ d: "flex", fd: "column", gap: "$2" }}>
-            <Box css={{ mx: "auto", mb: "$3" }}>
-              <Text b css={{ fz: "$3", ta: "center" }}>
-                {`Tina`}
-              </Text>
-              <Text css={{ color: "$slate11" }}>{`Masters in Teaching`}</Text>
-            </Box>
-            <Text as="blockquote" css={{ fz: "$3" }}>
-              {`"Love it, been using it for university and it's a life saver"`}
-            </Text>
-          </Box>
-        </TestimonyCard>
+        <Grid
+          css={{
+            "@bp3": {
+              gtc: "repeat(2, 1fr)",
+            },
+          }}
+        >
+          {testimonies.map((t) => (
+            <TestimonyCard key={t.name}>
+              <Avatar width="100" height="100" src={t.avatar} alt="Profile" />
+              <Box css={{ d: "flex", fd: "column", gap: "$2" }}>
+                <Box css={{ mx: "auto", mb: "$3" }}>
+                  <Text b css={{ fz: "$3", ta: "center" }}>
+                    {`${t.name}`}
+                  </Text>
+                  <Text
+                    css={{ color: "$slate11", mt: "$2" }}
+                  >{`${t.title}`}</Text>
+                </Box>
+                <Text as="blockquote" css={{ fz: "$3" }}>
+                  {`${t.quote}`}
+                </Text>
+              </Box>
+            </TestimonyCard>
+          ))}
+        </Grid>
       </MainContent>
       <Footer>
         <Text>Made with ❤ by kndwin</Text>
@@ -147,7 +169,7 @@ const Footer = styled("footer", {
 
 const TestimonyCard = styled("div", {
   br: "$3",
-  miw: "20em",
+  w: "100%",
   mih: "10em",
   p: "$4",
   bc: "$slate3",
@@ -161,8 +183,9 @@ const TestimonyCard = styled("div", {
 });
 
 const Avatar = styled("img", {
-  size: "5em",
+  size: "8em",
   br: "$round",
+  mx: "auto",
 });
 
 const Title = styled("div", {
